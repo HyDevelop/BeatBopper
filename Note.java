@@ -11,9 +11,12 @@ public class Note extends Actor
     /** When does this note appear */
     private long time;
     
-    public Note(GreenfootImage image)
+    /** It has to know it's column to decide which image to use */
+    private int column;
+    
+    public Note(/* todo */)
     {
-        setImage(image);
+        // Todo
     }
     
     /**
