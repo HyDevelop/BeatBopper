@@ -40,7 +40,12 @@ public class Images
     public static final GreenfootImage STAGE_LEFT = new GreenfootImage("mania-stage-left.png");
     public static final GreenfootImage STAGE_RIGHT = new GreenfootImage("mania-stage-right.png");
     public static final GreenfootImage STAGE_LIGHT = new GreenfootImage("mania-stage-light.png");
+    public static final GreenfootImage STAGE_HINT = new GreenfootImage("mania-stage-hint.png");
 
     // Counter
     public static final GreenfootImage COUNTER = new GreenfootImage("Counter.png");
+
+    // Wallpaper
+    public static final GreenfootImage WALLPAPER = new GreenfootImage("wallpaper-xperanza.jpg");
+    public static final GreenfootImage BLACK = new GreenfootImage("black-2x2.png");
 }
