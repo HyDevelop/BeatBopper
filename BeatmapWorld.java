@@ -14,7 +14,7 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  * @author Mr. Gilmore (Teacher)
  * @version 2019-05-21
  */
-public class GameWorld extends World
+public class BeatmapWorld extends World
 {
 
     /** The keypress handler */
@@ -27,10 +27,13 @@ public class GameWorld extends World
      * Constructor for objects of class MyWorld.
      * 
      */
-    public GameWorld()
+    public BeatmapWorld()
     {    
         // Set resolution
-        super(600, 800, 1);
+        super(1200, 800, 1);
+
+        // Show stage images
+        addObject(new ImageDisplayer(Images.STAGE_LEFT), 0, 0);
 
         // Initialize keypress handler
         addObject(keypressHandler = new KeypressHandler(), 0, 0);
