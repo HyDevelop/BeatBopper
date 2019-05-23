@@ -19,7 +19,7 @@ public class TimingController
      */
     public boolean isRunning()
     {
-        return events.get(events.size() - 1).start;
+        return events.size() != 0 && events.get(events.size() - 1).start;
     }
 
     /**
@@ -53,7 +53,7 @@ public class TimingController
      *
      * @return The total duration (ignoring pauses)
      */
-    public long totalDuration()
+    public long getTotalDuration()
     {
         long total = 0;
 
@@ -69,7 +69,8 @@ public class TimingController
             total -= System.currentTimeMillis();
         }
 
-        return total;
+        // Returns negative total because total = end - start
+        return -total;
     }
 
     /**
