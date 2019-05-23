@@ -26,10 +26,10 @@ public class Constants
     public static final int GRAPHIC_LANDING = 150;
 
     /** How high is the keys? */
-    public static final int GRAPHIC_KEY_HEIGHT = 130;
+    public static final int GRAPHIC_KEY_HEIGHT = 220; // 140
 
     /** Represents vertical translation: y = m ( x - h ) + k */
-    public static final int GRAPHIC_KEY_K = -10;
+    public static final int GRAPHIC_KEY_K = 0; // -10
 
     /** Darken the wallpaper */
     public static final int GRAPHIC_WALLPAPER_DARKEN = (int) (255 * 0.7);

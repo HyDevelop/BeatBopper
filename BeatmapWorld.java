@@ -1,3 +1,4 @@
+import greenfoot.GreenfootImage;
 import greenfoot.World;
 
 /**
@@ -34,40 +35,33 @@ public class BeatmapWorld extends World
         // Show wallpaper
         // TODO: Find a better wallpaper
         {
-            // Add image object
-            ImageDisplayer wallpaper = new ImageDisplayer(Images.WALLPAPER);
-            addObject(wallpaper, Constants.WIDTH / 2, Constants.HEIGHT / 2);
-
             // Simple proportions calculations right?
-            int origWidth = wallpaper.getImage().getWidth();
-            int origHeight = wallpaper.getImage().getHeight();
-            wallpaper.getImage().scale((int) (1.0 * origWidth / origHeight * Constants.HEIGHT), Constants.HEIGHT);
+            int origWidth = Images.WALLPAPER.getWidth();
+            int origHeight = Images.WALLPAPER.getHeight();
+            Images.WALLPAPER.scale((int) (1.0 * origWidth / origHeight * Constants.HEIGHT), Constants.HEIGHT);
+            getBackground().drawImage(Images.WALLPAPER, 0, 0);
         }
 
         // Darken wallpaper with a black overlay
         {
-            ImageDisplayer black = new ImageDisplayer(Images.BLACK);
-            black.getImage().scale(Constants.WIDTH, Constants.HEIGHT);
-            black.getImage().setTransparency(Constants.GRAPHIC_WALLPAPER_DARKEN);
-            addObject(black, Constants.WIDTH / 2, Constants.HEIGHT / 2);
+            Images.BLACK.scale(Constants.WIDTH, Constants.HEIGHT);
+            Images.BLACK.setTransparency(Constants.GRAPHIC_WALLPAPER_DARKEN);
+            getBackground().drawImage(Images.BLACK, 0, 0);
         }
 
         // Show stage images
         {
-            ImageDisplayer left = new ImageDisplayer(Images.STAGE_LEFT);
-            ImageDisplayer right = new ImageDisplayer(Images.STAGE_RIGHT);
-
-            // Calculate x and y, and set them.
-            int y = Constants.HEIGHT / 2;
-            int x = Constants.GRAPHIC_COL_OFFSET - Constants.GRAPHIC_TOTAL_LENGTH / Constants.KEYS.length / 2;
-            int xLeft = x - left.getImage().getWidth() / 2;
-            int xRight = x + left.getImage().getWidth() / 2 + Constants.GRAPHIC_TOTAL_LENGTH;
-            addObject(left, xLeft, y);
-            addObject(right, xRight, y);
+            GreenfootImage left = Images.STAGE_LEFT;
+            GreenfootImage right = Images.STAGE_RIGHT;
 
             // Scale height
-            left.getImage().scale(left.getImage().getWidth(), Constants.HEIGHT);
-            right.getImage().scale(right.getImage().getWidth(), Constants.HEIGHT);
+            left.scale(left.getWidth(), Constants.HEIGHT);
+            right.scale(right.getWidth(), Constants.HEIGHT);
+
+            // Calculate x and draw image
+            int x = Constants.GRAPHIC_COL_OFFSET - Constants.GRAPHIC_TOTAL_LENGTH / Constants.KEYS.length / 2;
+            getBackground().drawImage(left, x - left.getWidth(), 0);
+            getBackground().drawImage(right, x + Constants.GRAPHIC_TOTAL_LENGTH, 0);
         }
 
         // TODO: Add
