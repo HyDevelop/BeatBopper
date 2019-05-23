@@ -1,10 +1,12 @@
+import greenfoot.GreenfootSound;
+
 import java.util.ArrayList;
-import greenfoot.*;
 
 /**
  * A beatmap defines the arrangement of the notes in a song.
  * 
  * @author Team APCSA 2019
+ * @author Yijie Gui
  * @version 2019-05-21
  */
 public class Beatmap  

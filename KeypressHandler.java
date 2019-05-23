@@ -1,30 +1,93 @@
+import greenfoot.Actor;
+import greenfoot.Greenfoot;
+import greenfoot.GreenfootImage;
+
 /**
- * Write a description of class KeypressHandler here.
- * 
- * @author (your name) 
- * @version (a version number or a date)
+ * KeypressHandler handles key presses and register them to different
+ * components when needed.
+ *
+ * @author Team APCSA 2019
+ * @author Yijie Gui
+ * @version 2019-05-21
  */
-public class KeypressHandler  
+public class KeypressHandler extends Actor
 {
-    // instance variables - replace the example below with your own
-    private int x;
+    /** This should contain the key visualizers, in a row */
+    private Key[] keys;
 
     /**
      * Constructor for objects of class KeypressHandler
      */
     public KeypressHandler()
     {
+        // Create key array
+        keys = new Key[Constants.NUM_COLS];
+
+        // This actor does not need to have image
+        setImage((GreenfootImage) null);
     }
 
     /**
-     * An example of a method - replace this comment with your own
-     * 
-     * @param  y   a sample parameter for a method
-     * @return     the sum of x and y 
+     * Initialize keypress handler.
      */
-    public int sampleMethod(int y)
+    public void init()
     {
-        // put your code here
-        return x + y;
+        // Create keys and initialize
+        for (int i = 0; i < keys.length; i++)
+        {
+            getWorld().addObject(keys[i] = new Key(i, Constants.KEYS[i]), 0, 0);
+            keys[i].init();
+        }
+    }
+
+    /**
+     * Act: Detect key down for all the key buttons and call
+     * registerKeyPress() if the key is pressed. It basically converts
+     * Greenfoot.isKeyDown(), which returns a boolean value representing
+     * if the key is down, to method calls when keys are pressed or
+     * released.
+     */
+    public void act()
+    {
+        // Update key status
+        for (Key key : keys)
+        {
+            boolean keyDown = Greenfoot.isKeyDown(key.getKeyboardButton());
+            boolean lastDown = key.isPressed();
+
+            // Key turned from up to down
+            if (keyDown && !lastDown)
+            {
+                key.setPressed(true);
+                registerKeyPress(key);
+            }
+
+            // Key turned from down to up
+            if (!keyDown && lastDown)
+            {
+                key.setPressed(false);
+                registerKeyRelease(key);
+            }
+        }
+    }
+
+    /**
+     * Register a key press.
+     *
+     * @param key The key.
+     */
+    private void registerKeyPress(Key key)
+    {
+        // TODO: send signal to Beatmap
+    }
+
+    /**
+     * Register a key release.
+     *
+     * @param key The key.
+     */
+    private void registerKeyRelease(Key key)
+    {
+
     }
 }
