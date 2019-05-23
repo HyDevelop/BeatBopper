@@ -49,6 +49,14 @@ public class TimingController
     }
 
     /**
+     * Reset the timer.
+     */
+    public void reset()
+    {
+        events = new ArrayList<>();
+    }
+
+    /**
      * Calculate the total duration.
      *
      * @return The total duration (ignoring pauses)
