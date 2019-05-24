@@ -13,74 +13,125 @@ import greenfoot.GreenfootImage;
  * @author Andy Ge
  * @version 2019-05-22
  */
+@SuppressWarnings("WeakerAccess")
 public class ScoreCounter extends Actor
 {
     private static final Color TRANSPARENT = new Color(0,0,0,0);
-    private GreenfootImage background;
-    private double value;
     private String prefix;
-    
-    public ScoreCounter()
-    {
-        this("");
-    }
-   
+
+    /**
+     * This array stores the count of all the hit scores:
+     * scores[0]: Max
+     * scores[1]: Great
+     * scores[2]: Cool
+     * scores[3]: Good
+     * scores[4]: Bad
+     * scores[5]: Poor
+     * Timings for each score see JudgementController.calculateTimings().
+     */
+    private final int[] scores = new int[6];
+
+    /**
+     * This array stores scores in the hit order.
+     * Eg. [0, 0, 1, 0, 0, 0, 2, 1, 0, 0, 5, 3, 0, ...]
+     */
+    private final int[] scoresHitOrder;
+
+    /**
+     * Half note ratio.
+     * See ScoreCalculator.calculateHalfNoteRatio() for more details.
+     */
+    private final double halfNoteRatio;
+
+    /** The index of the current note (Live updating) */
+    private int noteIndex = 0;
+
+    /** Total score (Live updating) */
+    private double totalScore = 0;
+
+    /** Bonus (Live updating) */
+    private double bonus = 100;
+
     /**
      * Create a new counter, initialised to 0.
+     *
+     * @param prefix of the counter
      */
-    public ScoreCounter(String prefix)
+    public ScoreCounter(String prefix, Beatmap beatmap)
     {
-        background = Images.COUNTER; // Sets counter.
-        value = 0;
         this.prefix = prefix;
+        this.scoresHitOrder = new int[beatmap.countTotalObjects()];
+        this.halfNoteRatio = ScoreCalculator.calculateHalfNoteRatio(beatmap.countTotalObjects());
         updateImage();
     }
-    
+
     /**
-     * Animate the display to count up or down
+     * Add a new hit score, and update the image.
+     *
+     * @param hit Hit value from 0 to 5 (From Great to Poor)
      */
-    public void act()
+    public void hit(int hit)
     {
-        /**
-        if(CorrectNotePlayed)
-        {
-            add(100);
-            updateImage();
-        }
-        else if(MistakeIsMade)
-        {
-            add(-100);
-            updateImage();
-        }
-        */
+        // Store scores.
+        scores[hit]++;
+        scoresHitOrder[noteIndex] = hit;
+        noteIndex ++;
+
+        // Update bonus and total score.
+        bonus = ScoreCalculator.calculateNewBonus(bonus, hit);
+        totalScore += ScoreCalculator.calculateHitScore(halfNoteRatio, bonus, hit);
+
+        updateImage();
     }
-    
+
     /**
-     * Add a new score to the current counter value.  This will animate
-     * the counter over consecutive frames until it reaches the new value.
-     */
-    public void add(double score)
-    {
-        value += score; 
-    }
-  
-    /**
-     * Update the image on screen to show the current value.
+     * Updates the image on screen to show the current value.
      */
     private void updateImage()
     {
-        GreenfootImage image = new GreenfootImage(background);
-        GreenfootImage text = new GreenfootImage(prefix + 
-            (int) value, 22, Color.BLACK, TRANSPARENT);
-        
+        GreenfootImage image = Images.COUNTER;
+        GreenfootImage text = new GreenfootImage(prefix + (int) totalScore, 22, Color.BLACK, TRANSPARENT);
+
         if (text.getWidth() > image.getWidth() - 20)
         {
             image.scale(text.getWidth() + 20, image.getHeight());
         }
-        
-        image.drawImage(text, (image.getWidth()-text.getWidth())/2, 
-        (image.getHeight()-text.getHeight())/2);
+
+        image.drawImage(text, (image.getWidth() - text.getWidth()) / 2, (image.getHeight() - text.getHeight()) / 2);
         setImage(image);
     }
-    
+
+    // ###################
+    // Getters and Setters
+    // ###################
+
+    public int[] getScores()
+    {
+        return scores;
+    }
+
+    public int[] getScoresHitOrder()
+    {
+        return scoresHitOrder;
+    }
+
+    public double getBonus()
+    {
+        return bonus;
+    }
+
+    public void setBonus(double bonus)
+    {
+        this.bonus = bonus;
+    }
+
+    public double getTotalScore()
+    {
+        return totalScore;
+    }
+
+    public double getHalfNoteRatio()
+    {
+        return halfNoteRatio;
+    }
 }
