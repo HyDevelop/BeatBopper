@@ -11,6 +11,7 @@ import greenfoot.GreenfootImage;
  * 
  * @author Team APCSA 2019
  * @author Andy Ge
+ * @author Yijie Gui
  * @version 2019-05-22
  */
 @SuppressWarnings("WeakerAccess")
