@@ -6,12 +6,13 @@
  * @since 2019-05-22 21:34
  */
 @SuppressWarnings("WeakerAccess")
-public class JudgementController
+public class JudgementCalculator
 {
     /** Timings, see calculateTimings() method for more info. */
     public final int[] timings;
 
     /**
+     * Construct a Judgement controller.
      *
      * @param beatmap Beatmap
      */
@@ -19,6 +20,10 @@ public class JudgementController
     {
         timings = calculateTimings(beatmap);
     }
+
+    /**
+     * @param noteTime The in-game time of the note.
+    {
 
     /**
      * Calculate the timing values from a beatmap.
@@ -46,4 +51,6 @@ public class JudgementController
                 // If player didn't hit, Poor.
         };
     }
+
+    // ###################
 }
