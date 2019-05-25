@@ -47,7 +47,7 @@ public class BeatmapReader
                     line = line.replace(": ", ":");
                     if (line.contains(":"))
                     {
-                        String[] split = line.split(": ");
+                        String[] split = line.split(":");
                         if (split.length == 2)
                         {
                             properties.put(split[0], split[1]);
@@ -83,8 +83,9 @@ public class BeatmapReader
             }
 
             // Validate properties.
-
+            validateProperties(properties);
             beatmap.setProperties(properties);
+
             // TODO: beatmap.setMusic();
         }
         catch (FileNotFoundException e)
