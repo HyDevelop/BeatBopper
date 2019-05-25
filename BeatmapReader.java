@@ -1,4 +1,5 @@
 import java.io.*;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -113,5 +114,53 @@ public class BeatmapReader
         // Make sure it's the right key count. (CircleSize in mode 3 means key count)
         if (!properties.get("CircleSize").equals("" + Constants.KEYS.length))
             throw new RuntimeException("Error: This beatmap is not " + Constants.KEYS.length + " keys.");
+    }
+
+    /**
+     * List all beatmaps under directory.
+     *
+     * @return All beatmaps' sub-directories.
+     */
+    public static ArrayList<File> listBeatmaps()
+    {
+        ArrayList<File> result = new ArrayList<>();
+
+        File[] files = Constants.BEATMAP_DIRECTORY.listFiles();
+        if (files == null) throw new RuntimeException("Error: Failed to get file list. (Maybe there are no files?)");
+
+        // Loop through all files under the dir.
+        for (File file : files)
+        {
+            // Only directories could be beatmaps
+            if (!file.isDirectory()) continue;
+
+            // Search sub directory to find: background.jpg or .png and .osu files.
+            File[] subFiles = file.listFiles();
+            if (subFiles == null) continue;
+
+            boolean containsBackground = false;
+            boolean containsOsu = false;
+
+            for (File subFile : subFiles)
+            {
+                String fileName = subFile.getName().toLowerCase();
+                if (fileName.contains("background") && (fileName.contains("jpg") || fileName.contains("png")))
+                {
+                    containsBackground = true;
+                }
+
+                if (fileName.endsWith(".osu"))
+                {
+                    containsOsu = true;
+                }
+            }
+
+            if (containsBackground && containsOsu)
+            {
+                result.add(file);
+            }
+        }
+
+        return result;
     }
 }
