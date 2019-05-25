@@ -9,14 +9,14 @@
 public class JudgementCalculator
 {
     /** Timings, see calculateTimings() method for more info. */
-    public final int[] timings;
+    private final int[] timings;
 
     /**
      * Construct a Judgement controller.
      *
      * @param beatmap Beatmap
      */
-    public JudgementController(Beatmap beatmap)
+    public JudgementCalculator(Beatmap beatmap)
     {
         timings = calculateTimings(beatmap);
     }
@@ -53,4 +53,11 @@ public class JudgementCalculator
     }
 
     // ###################
+    // Getters and Setters
+    // ###################
+
+    public int[] getTimings()
+    {
+        return timings;
+    }
 }
