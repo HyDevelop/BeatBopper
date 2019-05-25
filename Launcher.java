@@ -64,4 +64,12 @@ public class Launcher
 
         }).start();
     }
+
+    /**
+     * Launch the world as fast as possible.
+     */
+    public static void launchTest()
+    {
+        Greenfoot.setWorld(new BeatmapWorld("398366", "Hard"));
+    }
 }
