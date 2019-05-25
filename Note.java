@@ -1,35 +1,30 @@
 import greenfoot.Actor;
 
-import java.awt.*;
-
 /**
  * This class creates a Note object.
  * 
  * @author Steve Rosario
  * @version 2019-05-23
  */
+@SuppressWarnings("WeakerAccess")
 public class Note extends Actor
 {
-    private Color noteColor;
-    private long checkTime;
-    private long startTime;
+    private final long hitTime;
+    private final long startTime;
     private final int colNum;
 
     /**
      * Constructs a Note object with designated parameters.
      *
-     * @param noteColor the color of the note.
-     * @param checkTime the time that needs to be checked.
-     * @param colNum the column in which the Note appears.
+     * @param startTime The in-game time that the note is spawned.
+     * @param hitTime The in-game time that the note is hit.
+     * @param column The column number.
      */
-    public Note(Color noteColor, long checkTime, int colNum)
+    public Note(long startTime, long hitTime, int column)
     {
-        this.noteColor = noteColor;
-        this.checkTime = checkTime;
+        this.hitTime = hitTime;
         this.startTime = System.currentTimeMillis();
-        this.colNum = colNum;
-
-        //initPositionAndScale();
+        this.colNum = column;
     }
     
     /**
@@ -38,41 +33,32 @@ public class Note extends Actor
      */
     public void act() 
     {
-      //for(int i = 0; i< Images.NOTES.length; i++)
-      
-        setImage(Images.NOTES[colNum]);
-        int x = getX();
-        int y = getY();
+        setLocation(getX(), getY() + 1);
+    }
 
-        setLocation(x++, y);
-    
-    }
-    
     /**
-     * Helper method for init() that initializes the position.
+     * Initialize
      */
-    private void initPositionAndScale()
+    public void init()
     {
-        int noteLen = Constants.GRAPHIC_TOTAL_LENGTH / Constants.KEYS.length/4;
-        getImage().scale(noteLen, Constants.GRAPHIC_KEY_HEIGHT);
-       
-       
+        setImage(Images.NOTES[colNum]);
+
+        int noteLen = Constants.GRAPHIC_TOTAL_LENGTH / Constants.KEYS.length;
+        getImage().scale(noteLen, getImage().getHeight());
+
         int x = Constants.GRAPHIC_COL_OFFSET + noteLen * colNum;
-        int y = Constants.HEIGHT - (getImage().getHeight() / 2) 
-            - Constants.GRAPHIC_KEY_K;
-        setLocation (50, 100);
+        setLocation (x, 0);
     }
-    
-    public Color getNoteColor()
+
+    // ###################
+    // Getters and Setters
+    // ###################
+
+    public long getHitTime()
     {
-        return noteColor;
+        return hitTime;
     }
-    
-    public long getCheckTime()
-    {
-        return checkTime;
-    }
-    
+
     public long getStartTime()
     {
         return startTime;
