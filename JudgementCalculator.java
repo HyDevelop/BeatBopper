@@ -48,6 +48,24 @@ public class JudgementCalculator
     }
 
     /**
+     * Calculate if a note is missed or not. A note is only missed when
+     * it went over the last judgement window.
+     *
+     * @param noteTime The in-game time of the note.
+     * @param gameTime Current in-game time.
+     * @return Missed or not.
+     */
+    public boolean isMissed(int noteTime, int gameTime)
+    {
+        int late = gameTime - noteTime;
+
+        // Note is earlier than the game time.
+        if (late < 0) return false;
+
+        return timings[timings.length - 1] < late;
+    }
+
+    /**
      * Calculate the timing values from a beatmap.
      * Calculation Reference:
      * https://www.reddit.com/r/osugame/comments/6phntt/difficulty_settings_table_with_all_values/
