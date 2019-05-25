@@ -73,17 +73,37 @@ public class Beatmap
 
     public NoteInformation getFirstInLine(int col)
     {
-        return getPressed(col).get(0);
+        return getPast(col).get(0);
     }
 
-    public ArrayList<NoteInformation> getPressed(int col)
+    public ArrayList<NoteInformation> getPast(int col)
     {
-        return pressed[col];
+        return past[col];
     }
-    
-    public ArrayList<NoteInformation> getNotPressed(int col)
+
+    public ArrayList<NoteInformation>[] getPast()
     {
-        return notPressed[col];
+        return past;
+    }
+
+    public ArrayList<Note> getPresent(int col)
+    {
+        return present[col];
+    }
+
+    public ArrayList<Note>[] getPresent()
+    {
+        return present;
+    }
+
+    public ArrayList<NoteInformation> getFuture(int col)
+    {
+        return future[col];
+    }
+
+    public ArrayList<NoteInformation>[] getFuture()
+    {
+        return future;
     }
 
     public GreenfootSound getMusic()
