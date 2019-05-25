@@ -13,6 +13,8 @@ public class Note extends Actor
     private final int hitTime;
     private final int colNum;
 
+    private final long startSystemTime = System.currentTimeMillis();
+
     /**
      * Constructs a Note object with designated parameters.
      *
@@ -37,12 +39,14 @@ public class Note extends Actor
     }
     
     /**
-     * Act - do whatever the Note wants to do. This method is called whenever
-     * the 'Act' or 'Run' button gets pressed in the environment.
+     * The note fall down
      */
     public void act() 
     {
-        setLocation(getX(), getY() + 1);
+        int elapseTime = (int) (System.currentTimeMillis() - startSystemTime);
+
+        // Set location based on time.
+        setLocation(getX(), (int) Math.round((double) elapseTime / Constants.GAME_SPEED_MS * Constants.GRAPHIC_NOTE_LANDING));
     }
 
     /**
