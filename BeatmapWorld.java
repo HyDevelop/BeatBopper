@@ -150,4 +150,9 @@ public class BeatmapWorld extends World
     {
         return beatmap;
     }
+
+    public BeatmapController getBeatmapController()
+    {
+        return beatmapController;
+    }
 }
