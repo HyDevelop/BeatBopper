@@ -62,7 +62,7 @@ public class Beatmap
         int total = 0;
         for (int i = 0; i < Constants.KEYS.length; i++)
         {
-            total += pressed[i].size() + notPressed[i].size();
+            total += past[i].size() + present[i].size() + future[i].size();
         }
         return total;
     }
