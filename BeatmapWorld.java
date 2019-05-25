@@ -29,8 +29,8 @@ public class BeatmapWorld extends World
     /** Beatmap */
     private final Beatmap beatmap;
 
-    /** Judgement Controller */
-    private final JudgementController judgementController;
+    /** Beatmap Controller */
+    private final BeatmapController beatmapController;
 
     /**
      * Start a game with specific beatmap, specified by id and difficulty.
@@ -75,8 +75,8 @@ public class BeatmapWorld extends World
         addObject(keypressHandler = new KeypressHandler(), 0, 0);
         keypressHandler.init();
 
-        // Initialize judgement controller
-        judgementController = new JudgementController(beatmap);
+        // Initialize beatmap controller
+        addObject(beatmapController = new BeatmapController(beatmap, scoreCounter), 0, 0);
 
         // Draw background
         drawBackground();
