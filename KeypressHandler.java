@@ -10,6 +10,7 @@ import greenfoot.GreenfootImage;
  * @author Yijie Gui
  * @version 2019-05-21
  */
+@SuppressWarnings("WeakerAccess")
 public class KeypressHandler extends Actor
 {
     /** This should contain the key visualizers, in a row */
@@ -78,7 +79,7 @@ public class KeypressHandler extends Actor
      */
     private void registerKeyPress(Key key)
     {
-        // TODO: send signal to Beatmap
+        ((BeatmapWorld) getWorld()).getBeatmapController().hit(key.getColumn());
     }
 
     /**
@@ -88,6 +89,6 @@ public class KeypressHandler extends Actor
      */
     private void registerKeyRelease(Key key)
     {
-
+        // There is currently nothing to do.
     }
 }
