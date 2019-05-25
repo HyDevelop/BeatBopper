@@ -29,6 +29,9 @@ public class BeatmapWorld extends World
     /** Beatmap */
     private final Beatmap beatmap;
 
+    /** Judgement Controller */
+    private final JudgementController judgementController;
+
     /**
      * Start a game with specific beatmap, specified by id and difficulty.
      *
@@ -72,6 +75,9 @@ public class BeatmapWorld extends World
         addObject(keypressHandler = new KeypressHandler(), 0, 0);
         keypressHandler.init();
 
+        // Initialize judgement controller
+        judgementController = new JudgementController(beatmap);
+
         // Draw background
         drawBackground();
     }
@@ -103,6 +109,11 @@ public class BeatmapWorld extends World
             Images.BLACK.scale(Constants.WIDTH, Constants.HEIGHT);
             Images.BLACK.setTransparency(Constants.GRAPHIC_WALLPAPER_DARKEN);
             getBackground().drawImage(Images.BLACK, 0, 0);
+        }
+
+        // Darken hit columns
+        {
+            //TODO
         }
 
         // Show stage images
