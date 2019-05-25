@@ -18,6 +18,9 @@ public class Constants
     /** Height of the world */
     public static final int HEIGHT = 800;
 
+    /** How many millis is from spawning to hitting the notes? */
+    public static final int GAME_SPEED_MS = 1200;
+
     /** Where does the first col start? */
     public static final int GRAPHIC_COL_OFFSET = 150;
 
