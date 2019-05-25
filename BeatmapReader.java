@@ -75,7 +75,7 @@ public class BeatmapReader
                     }
 
                     // Add note to beatmap.
-                    beatmap.getNotPressed(col).add(new NoteInformation(Integer.parseInt(split[2]), col));
+                    beatmap.getFuture(col).add(new NoteInformation(Integer.parseInt(split[2]), col));
                 }
 
                 // Read next line.
