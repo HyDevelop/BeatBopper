@@ -61,7 +61,7 @@ public class TimingController
      *
      * @return The total duration (ignoring pauses)
      */
-    public long getTotalDuration()
+    public int getTotalDuration()
     {
         long total = 0;
 
@@ -78,7 +78,7 @@ public class TimingController
         }
 
         // Returns negative total because total = end - start
-        return -total;
+        return (int) -total;
     }
 
     /**
