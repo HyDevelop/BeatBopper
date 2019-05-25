@@ -1,3 +1,5 @@
+import java.io.File;
+
 /**
  * This class stores the constant value.
  *
@@ -36,4 +38,7 @@ public class Constants
 
     /** Keys (in 4 columns) */
     public static final String[] KEYS = {"D", "G", "J", "L"};
+
+    /** Directory to the beatmaps' sub-directories */
+    public static final File BEATMAP_DIRECTORY = new File("./beatmaps/");
 }
