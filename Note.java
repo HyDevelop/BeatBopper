@@ -25,6 +25,16 @@ public class Note extends Actor
         this.hitTime = hitTime;
         this.colNum = column;
     }
+
+    /**
+     * Construct a Note actor with Note info.
+     *
+     * @param noteInfo Note information
+     */
+    public Note(NoteInformation noteInfo)
+    {
+        this(noteInfo.getTime(), noteInfo.getColumn());
+    }
     
     /**
      * Act - do whatever the Note wants to do. This method is called whenever
