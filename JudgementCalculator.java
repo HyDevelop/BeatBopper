@@ -22,8 +22,30 @@ public class JudgementCalculator
     }
 
     /**
+     * Calculate the score of each hit. A hit cannot miss, only ignored
+     * notes are considered missed.
+     *
      * @param noteTime The in-game time of the note.
+     * @param gameTime The actual hit time of the note.
+     * @return Hit score (0 to 4). No notes = -1.
+     */
+    public int calculateHitScore(int noteTime, int gameTime)
     {
+        // How much ms is the player off by?
+        int off = Math.abs(noteTime - gameTime);
+
+        // Get the closest timing
+        for (int i = 0; i < timings.length; i++)
+        {
+            if (timings[i] < off)
+            {
+                return i;
+            }
+        }
+
+        // There are no notes.
+        return -1;
+    }
 
     /**
      * Calculate the timing values from a beatmap.
