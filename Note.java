@@ -9,8 +9,8 @@ import greenfoot.Actor;
 @SuppressWarnings("WeakerAccess")
 public class Note extends Actor
 {
-    private final long hitTime;
-    private final long startTime;
+    private final int startTime;
+    private final int hitTime;
     private final int colNum;
 
     /**
@@ -20,7 +20,7 @@ public class Note extends Actor
      * @param hitTime The in-game time that the note is hit.
      * @param column The column number.
      */
-    public Note(long startTime, long hitTime, int column)
+    public Note(int hitTime, int column)
     {
         this.hitTime = hitTime;
         this.startTime = System.currentTimeMillis();
@@ -54,17 +54,17 @@ public class Note extends Actor
     // Getters and Setters
     // ###################
 
-    public long getHitTime()
+    public int getHitTime()
     {
         return hitTime;
     }
 
-    public long getStartTime()
+    public int getStartTime()
     {
         return startTime;
     }
     
-    public int getColNum()
+    public int getColumn()
     {
         return colNum;
     }
