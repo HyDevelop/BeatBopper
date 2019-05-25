@@ -22,14 +22,14 @@ public class JudgementCalculator
     }
 
     /**
-     * Calculate the score of each hit. A hit cannot miss, only ignored
+     * Calculate the value of each hit. A hit cannot miss, only ignored
      * notes are considered missed.
      *
      * @param noteTime The in-game time of the note.
      * @param gameTime The actual hit time of the note.
-     * @return Hit score (0 to 4). No notes = -1.
+     * @return Hit value (0 to 4). No notes = -1.
      */
-    public int calculateHitScore(int noteTime, int gameTime)
+    public int calculateHitValue(int noteTime, int gameTime)
     {
         // How much ms is the player off by?
         int off = Math.abs(noteTime - gameTime);
