@@ -36,6 +36,15 @@ public class Constants
     /** Darken the wallpaper */
     public static final int GRAPHIC_WALLPAPER_DARKEN = (int) (255 * 0.7);
 
+    /** Song selection menu: how many songs are displayed each row? */
+    public static final int GRAPHIC_SELECTION_ROWS = 5;
+
+    /** Song selection menu: how many songs are displayed each col? */
+    public static final int GRAPHIC_SELECTION_COLS = 3;
+
+    /** Song selection menu: Minimum spacing between two icons. */
+    public static final int GRAPHIC_SELECTION_MIN_SPACING = 20;
+
     /** Keys (in 4 columns) */
     public static final String[] KEYS = {"D", "G", "J", "L"};
 
