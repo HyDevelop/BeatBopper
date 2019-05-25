@@ -1,6 +1,8 @@
 import greenfoot.Actor;
 import greenfoot.GreenfootImage;
 
+import java.util.ArrayList;
+
 /**
  * A BeatmapController is an actor that controls the beatmap, spawns the
  * notes in the correct timing, etc.
@@ -12,15 +14,36 @@ import greenfoot.GreenfootImage;
 public class BeatmapController extends Actor
 {
     /** Timing controller. */
-    private TimingController timer;
+    private final TimingController timer;
+
+    /** Beatmap. */
+    private final Beatmap beatmap;
+
+    /** Judgement calculator */
+    private final JudgementCalculator judgementCalculator;
+
+    /** Score counter. */
+    private final ScoreCounter scoreCounter;
 
     /**
      * Create a beatmap controller.
      */
-    public BeatmapController()
+    public BeatmapController(Beatmap beatmap, ScoreCounter scoreCounter)
     {
-        timer = new TimingController();
+        this.timer = new TimingController();
+        this.beatmap = beatmap;
+        this.judgementCalculator = new JudgementCalculator(beatmap);
+        this.scoreCounter = scoreCounter;
+
         setImage((GreenfootImage) null);
+    }
+
+    /**
+     * Start the timer. ( = Start the game)
+     */
+    public void startTimer()
+    {
+        timer.start();
     }
 
     /**
@@ -28,12 +51,14 @@ public class BeatmapController extends Actor
      */
     public void act()
     {
-        long gameTime = timer.getTotalDuration();
-        Beatmap beatmap = ((BeatmapWorld) getWorld()).getBeatmap();
+        // Get time
+        int gameTime = timer.getTotalDuration();
 
+        // Spawn notes.
         for (int i = 0; i < Constants.KEYS.length; i++)
         {
-            for (NoteInformation noteInfo : beatmap.getNotPressed(i))
+            // TODO: Optimize this (used new ArrayList because java.util.ConcurrentModificationException)
+            for (NoteInformation noteInfo : new ArrayList<NoteInformation>(beatmap.getFuture(i)))
             {
                 // Within the speed range.
                 if (noteInfo.getTime() - gameTime > Constants.GAME_SPEED_MS)
@@ -42,7 +67,22 @@ public class BeatmapController extends Actor
                 }
 
                 // Spawn the note to the top.
-                spawnNote(noteInfo, gameTime);
+                spawnNote(noteInfo);
+            }
+        }
+
+        // Register non-hit notes as missed.
+        for (ArrayList<Note> col : beatmap.getPresent())
+        {
+            // TODO: Optimize this (used new ArrayList because java.util.ConcurrentModificationException)
+            for (Note note : new ArrayList<Note>(col))
+            {
+                if (judgementCalculator.isMissed(note.getHitTime(), gameTime))
+                {
+                    // Register a missed note.
+                    // TODO: Test this
+                    registerHitAndRemoveNote(note, 5);
+                }
             }
         }
     }
@@ -52,11 +92,58 @@ public class BeatmapController extends Actor
      *
      * @param noteInfo Information of the note.
      */
-    private void spawnNote(NoteInformation noteInfo, long time)
+    private void spawnNote(NoteInformation noteInfo)
     {
-        Note note = new Note(time, noteInfo.getTime(), noteInfo.getColumn());
+        // Spawn the note.
+        Note note = new Note(noteInfo);
         getWorld().addObject(note, 0, 0);
         note.init();
+
+        // Put in present and remove from future.
+        beatmap.getPresent(noteInfo.getColumn()).add(note);
+        beatmap.getFuture(noteInfo.getColumn()).remove(noteInfo);
+    }
+
+    /**
+     * Remove a present note.
+     *
+     * @param note Present note actor.
+     * @param hitScore Hit score (From 0 to 5)
+     */
+    private void registerHitAndRemoveNote(Note note, int hitScore)
+    {
+        // Hit
+        scoreCounter.hit(hitScore);
+
+        // Remove note
+        note.getWorld().removeObject(note);
+
+        // Move from present to past
+        beatmap.getPresent(note.getColumn()).remove(note);
+        beatmap.getPast(note.getColumn()).add(new NoteInformation(note));
+    }
+
+    /**
+     * Register a hit.
+     *
+     * @param col Column number
+     */
+    public void hit(int col)
+    {
+        // Get time
+        int gameTime = timer.getTotalDuration();
+
+        // Check if there are any present notes
+        if (beatmap.getPresent(col).size() == 0) return;
+
+        // Get note
+        Note note = beatmap.getPresent(col).get(0);
+
+        // Calculate hit score
+        int hit = judgementCalculator.calculateHitValue(note.getHitTime(), gameTime);
+
+        // Register hit
+        registerHitAndRemoveNote(note, hit);
     }
 
     // ###################
@@ -66,5 +153,15 @@ public class BeatmapController extends Actor
     public TimingController getTimer()
     {
         return timer;
+    }
+
+    public Beatmap getBeatmap()
+    {
+        return beatmap;
+    }
+
+    public ScoreCounter getScoreCounter()
+    {
+        return scoreCounter;
     }
 }
