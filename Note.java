@@ -51,13 +51,14 @@ public class Note extends Actor
 
     /**
      * Initialize
+     * TODO: Make this static, execute only once on every col.
      */
     public void init()
     {
         setImage(Images.NOTES[colNum]);
 
         int noteLen = Constants.GRAPHIC_TOTAL_LENGTH / Constants.KEYS.length;
-        getImage().scale(noteLen, getImage().getHeight());
+        getImage().scale(noteLen, Constants.GRAPHIC_NOTE_HEIGHT);
 
         int x = Constants.GRAPHIC_COL_OFFSET + noteLen * colNum;
         setLocation (x, 0);
