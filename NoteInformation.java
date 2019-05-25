@@ -7,6 +7,7 @@
  * @author Yijie Gui
  * @since 2019-05-24 17:27
  */
+@SuppressWarnings("WeakerAccess")
 public class NoteInformation
 {
     /** Time is an integral number of milliseconds from the beginning
@@ -27,6 +28,20 @@ public class NoteInformation
         this.time = time;
         this.column = column;
     }
+
+    /**
+     * Construct a note information from a note actor.
+     *
+     * @param note Note actor
+     */
+    public NoteInformation(Note note)
+    {
+        this(note.getHitTime(), note.getColumn());
+    }
+
+    // ###################
+    // Getters and Setters
+    // ###################
 
     public int getTime()
     {
