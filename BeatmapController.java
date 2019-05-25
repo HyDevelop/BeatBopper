@@ -141,6 +141,9 @@ public class BeatmapController extends Actor
 
         // Calculate hit score
         int hit = judgementCalculator.calculateHitValue(note.getHitTime(), gameTime);
+        
+        // Player didn't hit anything in range.
+        if (hit == -1) return;
 
         // Register hit
         registerHitAndRemoveNote(note, hit);
