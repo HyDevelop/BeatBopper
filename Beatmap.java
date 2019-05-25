@@ -14,12 +14,19 @@ import java.util.Map;
 public class Beatmap
 {
     /**
-     * This is a list of arraylists representing the notes in each column.
+     * This is a list of array lists representing the notes in each column.
      * Eg. First column: noteColumns[0];
      * Eg. First note in first column: noteColumns[0].get(0);
+     *
+     * Past: Notes that the player already hit.
+     * Present: Notes that are on the screen.
+     * Future: Notes that are not yet spawned.
+     *
+     * Order: The earliest notes are at the front of the array.
      */
-    private ArrayList<NoteInformation>[] pressed;
-    private ArrayList<NoteInformation>[] notPressed;
+    private ArrayList<NoteInformation>[] future;
+    private ArrayList<Note>[] present;
+    private ArrayList<NoteInformation>[] past;
     
     /** Music */
     private GreenfootSound music;
@@ -33,13 +40,15 @@ public class Beatmap
     public Beatmap()
     {
         // Initialize array lists.
-        pressed = new ArrayList[Constants.KEYS.length];
-        notPressed = new ArrayList[Constants.KEYS.length];
+        future = new ArrayList[Constants.KEYS.length];
+        present = new ArrayList[Constants.KEYS.length];
+        past = new ArrayList[Constants.KEYS.length];
 
         for (int i = 0; i < Constants.KEYS.length; i++)
         {
-            pressed[i] = new ArrayList<>();
-            notPressed[i] = new ArrayList<>();
+            future[i] = new ArrayList<>();
+            present[i] = new ArrayList<>();
+            past[i] = new ArrayList<>();
         }
     }
 
