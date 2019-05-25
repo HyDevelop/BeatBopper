@@ -16,14 +16,13 @@ public class Note extends Actor
     /**
      * Constructs a Note object with designated parameters.
      *
-     * @param startTime The in-game time that the note is spawned.
      * @param hitTime The in-game time that the note is hit.
      * @param column The column number.
      */
     public Note(int hitTime, int column)
     {
+        this.startTime = hitTime - Constants.GAME_SPEED_MS;
         this.hitTime = hitTime;
-        this.startTime = System.currentTimeMillis();
         this.colNum = column;
     }
     
