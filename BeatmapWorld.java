@@ -87,7 +87,7 @@ public class BeatmapWorld extends World
      */
     public void startGame()
     {
-        // TODO
+        beatmapController.startTimer();
     }
 
     /**
