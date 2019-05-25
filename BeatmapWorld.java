@@ -1,6 +1,8 @@
 import greenfoot.GreenfootImage;
 import greenfoot.World;
 
+import java.io.File;
+
 /**
  * This is the gameplay stage.
  * 
@@ -15,25 +17,80 @@ import greenfoot.World;
  * @author Mr. Gilmore (Teacher)
  * @version 2019-05-21
  */
+@SuppressWarnings({"ConstantConditions", "WeakerAccess"})
 public class BeatmapWorld extends World
 {
-
     /** The keypress handler */
-    private KeypressHandler keypressHandler;
+    private final KeypressHandler keypressHandler;
+    
+    /** Initializes a new counter */ 
+    private final ScoreCounter scoreCounter;
 
-    /** It has to know it's column to decide which image to use */
-    private int column;
+    /** Beatmap */
+    private final Beatmap beatmap;
 
     /**
-     * Construct and initialize the world.
+     * Start a game with specific beatmap, specified by id and difficulty.
+     *
+     * @param beatmapId Beatmap ID (The number before the folder name)
+     * @param difficulty Difficulty name
      */
-    public BeatmapWorld()
-    {    
+    public BeatmapWorld(String beatmapId, String difficulty)
+    {
+        this(BeatmapReader.findBeatmapSetById(beatmapId), difficulty);
+    }
+
+    /**
+     * Start a game with specific beatmap, specified by beatmap set
+     * directory and difficulty.
+     *
+     * @param beatmapSet Beatmap set directory.
+     * @param difficulty Difficulty name.
+     */
+    public BeatmapWorld(File beatmapSet, String difficulty)
+    {
+        this(BeatmapReader.read(BeatmapReader.findBeatmapByDifficulty(beatmapSet, difficulty)));
+    }
+
+    /**
+     * Start a game with a specific beatmap.
+     *
+     * @param beatmap Beatmap object
+     */
+    public BeatmapWorld(Beatmap beatmap)
+    {
         // Set resolution
         super(Constants.WIDTH, Constants.HEIGHT, 1);
 
+        this.beatmap = beatmap;
+
+        // Creates a new counter and adds it to the world
+        scoreCounter = null;
+        //counter = new ScoreCounter("Score: ");
+        //addObject(counter,Constants.WIDTH - 100, 20);
+
+        // Initialize keypress handler
+        addObject(keypressHandler = new KeypressHandler(), 0, 0);
+        keypressHandler.init();
+
+        // Draw background
+        drawBackground();
+    }
+
+    /**
+     * Start the game.
+     */
+    public void startGame()
+    {
+        // TODO
+    }
+
+    /**
+     * Draw the wallpaper and stage images and stuff.
+     */
+    private void drawBackground()
+    {
         // Show wallpaper
-        // TODO: Find a better wallpaper
         {
             // Simple proportions calculations right?
             int origWidth = Images.WALLPAPER.getWidth();
@@ -63,14 +120,6 @@ public class BeatmapWorld extends World
             getBackground().drawImage(left, x - left.getWidth(), 0);
             getBackground().drawImage(right, x + Constants.GRAPHIC_TOTAL_LENGTH, 0);
         }
-
-        // TODO: Add
-
-        // Initialize keypress handler
-        addObject(keypressHandler = new KeypressHandler(), 0, 0);
-        keypressHandler.init();
-
-        // TODO: Show stage right and left images.
     }
 
     // ###################
@@ -80,5 +129,15 @@ public class BeatmapWorld extends World
     public KeypressHandler getKeypressHandler()
     {
         return keypressHandler;
+    }
+    
+    public ScoreCounter getScoreCounter()
+    {
+        return scoreCounter;
+    }
+
+    public Beatmap getBeatmap()
+    {
+        return beatmap;
     }
 }
