@@ -121,7 +121,7 @@ public class BeatmapReader
      *
      * @return All beatmaps' sub-directories.
      */
-    public static ArrayList<File> listBeatmaps()
+    public static ArrayList<File> listBeatmapSets()
     {
         ArrayList<File> result = new ArrayList<>();
 
@@ -168,9 +168,9 @@ public class BeatmapReader
      * Find beatmap by beatmap id.
      *
      * @param id Beatmap id.
-     * @return Beatmap sub-directory. (Null if not found)
+     * @return Beatmap set's sub-directory. (Null if not found)
      */
-    public static File findBeatmapById(String id)
+    public static File findBeatmapSetById(String id)
     {
         File[] files = Constants.BEATMAP_DIRECTORY.listFiles();
         if (files == null) throw new RuntimeException("Error: Failed to get file list. (Maybe there are no files?)");
@@ -184,5 +184,32 @@ public class BeatmapReader
         }
 
         return null;
+    }
+
+    /**
+     * List the difficulties of a beatmap set
+     *
+     * @param beatmapSet Beatmap's sub-directory
+     * @return All difficulties' names
+     */
+    public static ArrayList<String> listDifficulties(File beatmapSet)
+    {
+        ArrayList<String> results = new ArrayList<>();
+
+        File[] files = beatmapSet.listFiles();
+        if (files == null) throw new RuntimeException("Error: Failed to get file list. (Maybe there are no files?)");
+
+        for (File file : files)
+        {
+            if (file.isFile() && file.getName().endsWith(".osu"))
+            {
+                // Find the last set of "[]".
+                String[] split = file.getName().split("\\[");
+                String diff = split[split.length - 1].split("\\]")[0];
+                results.add(diff);
+            }
+        }
+
+        return results;
     }
 }
