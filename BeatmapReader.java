@@ -212,4 +212,33 @@ public class BeatmapReader
 
         return results;
     }
+
+    /**
+     * Find a beatmap inside a beatmap set with specified difficulty.
+     *
+     * @param beatmapSet Beatmap's sub-directory
+     * @param difficulty Difficulty name
+     * @return Beatmap file. (Null if not found)
+     */
+    public static File findBeatmapByDifficulty(File beatmapSet, String difficulty)
+    {
+        File[] files = beatmapSet.listFiles();
+        if (files == null) throw new RuntimeException("Error: Failed to get file list. (Maybe there are no files?)");
+
+        for (File file : files)
+        {
+            if (file.isFile() && file.getName().endsWith(".osu"))
+            {
+                // Find the last set of "[]".
+                String[] split = file.getName().split("\\[");
+                String diff = split[split.length - 1].split("\\]")[0];
+                if (diff.equalsIgnoreCase(difficulty))
+                {
+                    return file;
+                }
+            }
+        }
+
+        return null;
+    }
 }
