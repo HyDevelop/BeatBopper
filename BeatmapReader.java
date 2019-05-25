@@ -163,4 +163,26 @@ public class BeatmapReader
 
         return result;
     }
+
+    /**
+     * Find beatmap by beatmap id.
+     *
+     * @param id Beatmap id.
+     * @return Beatmap sub-directory. (Null if not found)
+     */
+    public static File findBeatmapById(String id)
+    {
+        File[] files = Constants.BEATMAP_DIRECTORY.listFiles();
+        if (files == null) throw new RuntimeException("Error: Failed to get file list. (Maybe there are no files?)");
+
+        for (File file : files)
+        {
+            if (file.isDirectory() && file.getName().split(" ")[0].equals(id))
+            {
+                return file;
+            }
+        }
+
+        return null;
+    }
 }
