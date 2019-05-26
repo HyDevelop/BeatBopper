@@ -62,4 +62,7 @@ public class Constants
 
     /** Directory to the beatmaps' sub-directories */
     public static final File BEATMAP_DIRECTORY = new File("./beatmaps/");
+
+    /** Debug or not */
+    public static final boolean DEBUG_MODE = false;
 }
