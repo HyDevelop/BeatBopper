@@ -11,6 +11,7 @@ import java.util.ArrayList;
  * @author Yijie Gui
  * @since 2019-05-25 06:37
  */
+@SuppressWarnings("WeakerAccess")
 public class BeatmapController extends Actor
 {
     /** Timing controller. */
@@ -161,6 +162,11 @@ public class BeatmapController extends Actor
     public Beatmap getBeatmap()
     {
         return beatmap;
+    }
+
+    public JudgementCalculator getJudgementCalculator()
+    {
+        return judgementCalculator;
     }
 
     public ScoreCounter getScoreCounter()
