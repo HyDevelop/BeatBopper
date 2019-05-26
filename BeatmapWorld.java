@@ -20,6 +20,8 @@ import java.io.File;
 @SuppressWarnings({"ConstantConditions", "WeakerAccess"})
 public class BeatmapWorld extends World
 {
+    private static final double TIMING_OFFSET_RATIO = (double) Constants.GRAPHIC_NOTE_LANDING / Constants.GAME_SPEED_MS;
+
     /** The keypress handler */
     private final KeypressHandler keypressHandler;
     
