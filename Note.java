@@ -1,4 +1,5 @@
 import greenfoot.Actor;
+import greenfoot.GreenfootImage;
 
 /**
  * This class creates a Note object.
@@ -19,6 +20,12 @@ public class Note extends Actor
 
     private final long startSystemTime = System.currentTimeMillis();
 
+    // Init note textures when this class is accessed for the first time.
+    static
+    {
+        initNoteTextures();
+    }
+
     /**
      * Constructs a Note object with designated parameters.
      *
@@ -30,6 +37,8 @@ public class Note extends Actor
         this.startTime = hitTime - Constants.GAME_SPEED_MS;
         this.hitTime = hitTime;
         this.column = column;
+
+        setImage(Images.NOTES[column]);
     }
 
     /**
@@ -54,18 +63,23 @@ public class Note extends Actor
     }
 
     /**
-     * Initialize
-     * TODO: Make this static, execute only once on every col.
+     * Initialize position
      */
     public void init()
     {
-        setImage(Images.NOTES[colNum]);
+        int x = Constants.GRAPHIC_COL_OFFSET + NOTE_WIDTH * column;
+        setLocation(x, 0);
+    }
 
-        int noteLen = Constants.GRAPHIC_TOTAL_LENGTH / Constants.KEYS.length;
-        getImage().scale(noteLen, Constants.GRAPHIC_NOTE_HEIGHT);
-
-        int x = Constants.GRAPHIC_COL_OFFSET + noteLen * colNum;
-        setLocation (x, 0);
+    /**
+     * Initialize note textures
+     */
+    public static void initNoteTextures()
+    {
+        for (GreenfootImage note : Images.NOTES)
+        {
+            note.scale(NOTE_WIDTH, Constants.GRAPHIC_NOTE_HEIGHT);
+        }
     }
 
     // ###################
