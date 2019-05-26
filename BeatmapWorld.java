@@ -80,6 +80,10 @@ public class BeatmapWorld extends World
 
         // Draw background
         drawBackground();
+
+        // Create a start button
+        // TODO: Implement song selection menu
+        addObject(new StartButton(), 800, 200);
     }
 
     /**
