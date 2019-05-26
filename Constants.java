@@ -27,6 +27,9 @@ public class Constants
     /** How many millis is from the supposed start of music to the actual start? */
     public static final int GAME_MUSIC_OFFSET = -258;
 
+    /** How much times easier is the judgement of the game? ( < 1 = harder) */
+    public static final double GAME_EASY_MULTIPLIER = 2;
+
     /** Where does the first col start? */
     public static final int GRAPHIC_COL_OFFSET = 150;
 
