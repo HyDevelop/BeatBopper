@@ -1,3 +1,4 @@
+import greenfoot.Color;
 import greenfoot.GreenfootImage;
 import greenfoot.World;
 
@@ -136,6 +137,25 @@ public class BeatmapWorld extends World
             getBackground().drawImage(left, x - left.getWidth(), 0);
             getBackground().drawImage(right, x + Constants.GRAPHIC_TOTAL_LENGTH, 0);
         }
+
+        // Draw debug stuff
+        if (Constants.DEBUG_MODE)
+        {
+            // Draw white line showing the hit place
+            drawLine(0, Constants.GRAPHIC_NOTE_LANDING, Constants.WIDTH, 5, Color.WHITE);
+
+            // Debug: Draw lines showing the hit windows
+            Color[] timingColors = {Color.CYAN, Color.GREEN, Color.YELLOW, Color.ORANGE, Color.RED};
+            //Color[] timingColors = {Color.BLACK, Color.BLACK, Color.BLACK, Color.BLACK, Color.BLACK};
+            for (int i = 0; i < getBeatmapController().getJudgementCalculator().getTimings().length; i++)
+            {
+                int timing = getBeatmapController().getJudgementCalculator().getTimings()[i];
+                drawOffsetLine(timing, timingColors[i], 2);
+                drawOffsetLine(-timing, timingColors[i], 2);
+            }
+        }
+    }
+
     /**
      * Draw a timing offset line.
      */
