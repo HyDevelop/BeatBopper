@@ -27,12 +27,22 @@ public class TimingController
      */
     public void start()
     {
+        start(0);
+    }
+
+    /**
+     * Start the timer.
+     *
+     * @param offset Offset time.
+     */
+    public void start(int offset)
+    {
         if (isRunning())
         {
             throw new RuntimeException("You can't start an already started timer.");
         }
 
-        events.add(new TimingEvent(System.currentTimeMillis(), true));
+        events.add(new TimingEvent(System.currentTimeMillis() + offset, true));
     }
 
     /**
