@@ -40,11 +40,12 @@ public class BeatmapController extends Actor
     }
 
     /**
-     * Start the timer. ( = Start the game)
+     * Start the timer and music. ( = Start the game)
      */
-    public void startTimer()
+    public void start()
     {
-        timer.start();
+        timer.start(-Constants.GAME_MUSIC_OFFSET);
+        beatmap.getMusic().play();
     }
 
     /**
