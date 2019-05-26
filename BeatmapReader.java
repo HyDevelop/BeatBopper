@@ -121,6 +121,10 @@ public class BeatmapReader
         // Make sure it's the right key count. (CircleSize in mode 3 means key count)
         if (!properties.get("CircleSize").equals("" + Constants.KEYS.length))
             throw new RuntimeException("Error: This beatmap is not " + Constants.KEYS.length + " keys.");
+
+        // Make sure it has audio
+        if (!properties.containsKey("AudioFilename"))
+            throw new RuntimeException("Error: This beatmap does not have audio");
     }
 
     /**
