@@ -1,3 +1,5 @@
+import greenfoot.sound.SoundFactory;
+
 import javax.swing.*;
 import java.io.*;
 import java.util.ArrayList;
@@ -87,7 +89,9 @@ public class BeatmapReader
             validateProperties(properties);
             beatmap.setProperties(properties);
 
-            // TODO: beatmap.setMusic();
+            // Set beatmap music
+            File audio = new File(file.getParentFile(), properties.get("AudioFilename"));
+            beatmap.setMusic(SoundFactory.getInstance().createSound(audio.toURI().toString(), false));
         }
         catch (FileNotFoundException e)
         {
