@@ -37,7 +37,7 @@ public class JudgementCalculator
         // Get the closest timing
         for (int i = 0; i < timings.length; i++)
         {
-            if (timings[i] < off)
+            if (timings[i] > off)
             {
                 return i;
             }
@@ -80,7 +80,7 @@ public class JudgementCalculator
         double overallOffset = (overall * 3) + 0.5;
 
         // Create timings array
-        return new int[]
+        int[] timings = new int[]
         {
                 17, // Max
                 (int) (64 - overallOffset), // Great
@@ -90,6 +90,14 @@ public class JudgementCalculator
                 // If larger than Bad, ignore it.
                 // If player didn't hit, Poor.
         };
+
+        // Add easy multiplier
+        for (int i = 0; i < timings.length; i++)
+        {
+            timings[i] *= (double) Constants.GAME_EASY_MULTIPLIER;
+        }
+
+        return timings;
     }
 
     // ###################
