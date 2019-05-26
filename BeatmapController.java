@@ -63,7 +63,7 @@ public class BeatmapController extends Actor
             for (NoteInformation noteInfo : new ArrayList<>(beatmap.getFuture(i)))
             {
                 // Within the speed range.
-                if (noteInfo.getTime() - gameTime > Constants.GAME_SPEED_MS)
+                if (noteInfo.getTime() + Constants.GAME_SPAWNING_OFFSET - gameTime > Constants.GAME_SPEED_MS)
                 {
                     break;
                 }
