@@ -90,7 +90,7 @@ public class ScoreCounter extends Actor
      */
     private void updateImage()
     {
-        GreenfootImage image = Images.COUNTER;
+        GreenfootImage image = new GreenfootImage(Images.COUNTER);
         GreenfootImage text = new GreenfootImage(prefix + (int) totalScore, 22, Color.BLACK, TRANSPARENT);
 
         if (text.getWidth() > image.getWidth() - 20)
