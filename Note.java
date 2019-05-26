@@ -11,6 +11,8 @@ import greenfoot.Actor;
 @SuppressWarnings("WeakerAccess")
 public class Note extends Actor
 {
+    private static final int NOTE_WIDTH = Constants.GRAPHIC_TOTAL_LENGTH / Constants.KEYS.length;
+
     private final int startTime;
     private final int hitTime;
     private final int column;
