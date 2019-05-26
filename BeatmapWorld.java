@@ -136,6 +136,21 @@ public class BeatmapWorld extends World
             getBackground().drawImage(left, x - left.getWidth(), 0);
             getBackground().drawImage(right, x + Constants.GRAPHIC_TOTAL_LENGTH, 0);
         }
+    /**
+     * Draw a line on the background
+     *
+     * @param x X
+     * @param y Y
+     * @param width Width
+     * @param height Height
+     * @param color Color
+     */
+    public void drawLine(int x, int y, int width, int height, Color color)
+    {
+        GreenfootImage white = new GreenfootImage(width, height);
+        white.setColor(color);
+        white.drawRect(0, 0, width, height);
+        getBackground().drawImage(white, x, y);
     }
 
     // ###################
