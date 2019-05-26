@@ -21,6 +21,9 @@ public class Constants
     /** How many millis is from spawning to hitting the notes? */
     public static final int GAME_SPEED_MS = 1200;
 
+    /** How many millis is from the supposed spawning to the actual spawning? */
+    public static final int GAME_SPAWNING_OFFSET = -50;
+
     /** How many millis is from the supposed start of music to the actual start? */
     public static final int GAME_MUSIC_OFFSET = -258;
 
