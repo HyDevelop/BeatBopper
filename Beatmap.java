@@ -1,4 +1,4 @@
-import greenfoot.GreenfootSound;
+import greenfoot.sound.Sound;
 
 import java.util.ArrayList;
 import java.util.Map;
@@ -29,7 +29,7 @@ public class Beatmap
     private ArrayList<NoteInformation>[] past;
     
     /** Music */
-    private GreenfootSound music;
+    private Sound music;
 
     /** Properties */
     private Map<String, String> properties;
@@ -106,12 +106,12 @@ public class Beatmap
         return future;
     }
 
-    public GreenfootSound getMusic()
+    public Sound getMusic()
     {
         return music;
     }
 
-    public void setMusic(GreenfootSound music)
+    public void setMusic(Sound music)
     {
         this.music = music;
     }
