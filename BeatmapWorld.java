@@ -137,6 +137,15 @@ public class BeatmapWorld extends World
             getBackground().drawImage(right, x + Constants.GRAPHIC_TOTAL_LENGTH, 0);
         }
     /**
+     * Draw a timing offset line.
+     */
+    public void drawOffsetLine(int timingOffset, Color color, int height)
+    {
+        double offset = TIMING_OFFSET_RATIO * timingOffset;
+        drawLine(0, (int) Math.round(Constants.GRAPHIC_NOTE_LANDING + offset), Constants.WIDTH, height, color);
+    }
+
+    /**
      * Draw a line on the background
      *
      * @param x X
