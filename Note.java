@@ -2,8 +2,10 @@ import greenfoot.Actor;
 
 /**
  * This class creates a Note object.
- * 
+ *
+ * @author Team APCSA 2019
  * @author Steve Rosario
+ * @author Yijie Gui
  * @version 2019-05-23
  */
 @SuppressWarnings("WeakerAccess")
@@ -11,7 +13,7 @@ public class Note extends Actor
 {
     private final int startTime;
     private final int hitTime;
-    private final int colNum;
+    private final int column;
 
     private final long startSystemTime = System.currentTimeMillis();
 
@@ -25,7 +27,7 @@ public class Note extends Actor
     {
         this.startTime = hitTime - Constants.GAME_SPEED_MS;
         this.hitTime = hitTime;
-        this.colNum = column;
+        this.column = column;
     }
 
     /**
@@ -80,6 +82,6 @@ public class Note extends Actor
     
     public int getColumn()
     {
-        return colNum;
+        return column;
     }
 }
