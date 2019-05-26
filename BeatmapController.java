@@ -1,4 +1,5 @@
 import greenfoot.Actor;
+import greenfoot.Color;
 import greenfoot.GreenfootImage;
 
 import java.util.ArrayList;
@@ -146,6 +147,12 @@ public class BeatmapController extends Actor
         
         // Player didn't hit anything in range.
         if (hit == -1) return;
+
+        // Show debug line
+        if (Constants.DEBUG_MODE)
+        {
+            ((BeatmapWorld) getWorld()).drawOffsetLine(gameTime - note.getHitTime(), Color.PINK, 1);
+        }
 
         // Register hit
         registerHitAndRemoveNote(note, hit);
