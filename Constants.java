@@ -34,10 +34,10 @@ public class Constants
     public static final int GRAPHIC_TOTAL_LENGTH = 400;
 
     /** Landing point of the notes. */
-    public static final int GRAPHIC_NOTE_LANDING = HEIGHT - 150;
+    public static final int GRAPHIC_NOTE_LANDING = HEIGHT - 133;
 
     /** Height of the notes */
-    public static final int GRAPHIC_NOTE_HEIGHT = 20;
+    public static final int GRAPHIC_NOTE_HEIGHT = 30;
 
     /** How high is the keys? */
     public static final int GRAPHIC_KEY_HEIGHT = 220; // 140
