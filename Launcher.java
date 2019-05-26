@@ -70,6 +70,6 @@ public class Launcher
      */
     public static void launchTest()
     {
-        Greenfoot.setWorld(new BeatmapWorld("398366", "Hard"));
+        Greenfoot.setWorld(new BeatmapWorld("398366", "Normal"));
     }
 }
