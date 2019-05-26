@@ -1,3 +1,4 @@
+import javax.swing.*;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -91,11 +92,12 @@ public class BeatmapReader
         catch (FileNotFoundException e)
         {
             e.printStackTrace();
-            System.out.println("File not found");
+            JOptionPane.showMessageDialog(null, "ERROR: File not found");
         }
         catch (IOException e)
         {
             e.printStackTrace();
+            JOptionPane.showMessageDialog(null, "ERROR: File read error");
         }
 
         return beatmap;
