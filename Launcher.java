@@ -14,7 +14,7 @@ public class Launcher
     /**
      * Show a dialog to select song.
      * Note: I did this because I'm too lazy
-     * TODO: Someone please implement MainMenu!
+     * TODO: Remove this after MainMenu is implemented
      */
     @Deprecated
     public static void launchSongSelect()

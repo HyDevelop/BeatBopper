@@ -5,7 +5,7 @@ import greenfoot.GreenfootImage;
 
 /**
  * A start button on the BeatmapWorld
- * TODO: This will be unnecessary once MainMenu is done.
+ * TODO: Remove this after MainMenu is implemented.
  *
  * @author Team APCSA 2019
  * @author Yijie Gui

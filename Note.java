@@ -18,8 +18,6 @@ public class Note extends Actor
     private final int hitTime;
     private final int column;
 
-    private final long startSystemTime = System.currentTimeMillis();
-
     // Init note textures when this class is accessed for the first time.
     static
     {
@@ -56,10 +54,7 @@ public class Note extends Actor
      */
     public void act() 
     {
-        int elapseTime = (int) (System.currentTimeMillis() - startSystemTime);
-
-        // Set location based on time.
-        setLocation(getX(), (int) Math.round((double) elapseTime / Constants.GAME_SPEED_MS * Constants.GRAPHIC_NOTE_LANDING));
+        // TODO: Fall to the correct location.
     }
 
     /**
@@ -67,8 +62,7 @@ public class Note extends Actor
      */
     public void init()
     {
-        int x = Constants.GRAPHIC_COL_OFFSET + NOTE_WIDTH * column;
-        setLocation(x, 0);
+        // TODO: Initialize position
     }
 
     /**

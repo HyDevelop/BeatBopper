@@ -85,7 +85,7 @@ public class BeatmapWorld extends World
         drawBackground();
 
         // Create a start button
-        // TODO: Implement song selection menu
+        // TODO: Implement song selection menu (MainMenu)
         addObject(new StartButton(), 800, 200);
     }
 
@@ -120,7 +120,7 @@ public class BeatmapWorld extends World
 
         // Darken hit columns
         {
-            //TODO
+            //TODO: Darken hit columns
         }
 
         // Show stage images
