@@ -20,8 +20,6 @@ public class BeatmapReader
     /**
      * Deserialize beatmap object from a .osu file.
      *
-     * TODO: Read the music
-     *
      * @param file The .osu file.
      * @return Beatmap
      */
