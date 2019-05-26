@@ -60,7 +60,7 @@ public class BeatmapController extends Actor
         for (int i = 0; i < Constants.KEYS.length; i++)
         {
             // TODO: Optimize this (used new ArrayList because java.util.ConcurrentModificationException)
-            for (NoteInformation noteInfo : new ArrayList<NoteInformation>(beatmap.getFuture(i)))
+            for (NoteInformation noteInfo : new ArrayList<>(beatmap.getFuture(i)))
             {
                 // Within the speed range.
                 if (noteInfo.getTime() - gameTime > Constants.GAME_SPEED_MS)
@@ -77,7 +77,7 @@ public class BeatmapController extends Actor
         for (ArrayList<Note> col : beatmap.getPresent())
         {
             // TODO: Optimize this (used new ArrayList because java.util.ConcurrentModificationException)
-            for (Note note : new ArrayList<Note>(col))
+            for (Note note : new ArrayList<>(col))
             {
                 if (judgementCalculator.isMissed(note.getHitTime(), gameTime))
                 {
