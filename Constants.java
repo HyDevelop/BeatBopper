@@ -48,6 +48,12 @@ public class Constants
     /** Represents vertical translation: y = m ( x - h ) + k */
     public static final int GRAPHIC_KEY_K = 0; // -10
 
+    /** Key flash disappear speed */
+    public static final int GRAPHIC_KEY_FLASH_SPEED = 20;
+
+    /** Key hit score disappear speed */
+    public static final int GRAPHIC_KEY_HIT_SCORE_SPEED = 8;
+
     /** Darken the wallpaper */
     public static final int GRAPHIC_WALLPAPER_DARKEN = (int) (255 * 0.7);
 
