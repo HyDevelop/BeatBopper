@@ -14,7 +14,10 @@ import greenfoot.GreenfootImage;
 public class KeypressHandler extends Actor
 {
     /** This should contain the key visualizers, in a row */
-    private Key[] keys;
+    private final Key[] keys;
+
+    /** Key flashes, in a row */
+    private final KeyFlash[] keyFlashes;
 
     /**
      * Constructor for objects of class KeypressHandler
@@ -23,6 +26,9 @@ public class KeypressHandler extends Actor
     {
         // Create key array
         keys = new Key[Constants.NUM_COLS];
+
+        // Create key flashes array
+        keyFlashes = new KeyFlash[Constants.NUM_COLS];
 
         // This actor does not need to have image
         setImage((GreenfootImage) null);
@@ -38,6 +44,8 @@ public class KeypressHandler extends Actor
         {
             getWorld().addObject(keys[i] = new Key(i, Constants.KEYS[i]), 0, 0);
             keys[i].init();
+            getWorld().addObject(keyFlashes[i] = new KeyFlash(i), 0, 0);
+            keyFlashes[i].init();
         }
     }
 
@@ -80,6 +88,7 @@ public class KeypressHandler extends Actor
     private void registerKeyPress(Key key)
     {
         ((BeatmapWorld) getWorld()).getBeatmapController().hit(key.getColumn());
+        keyFlashes[key.getColumn()].press();
     }
 
     /**
@@ -89,6 +98,6 @@ public class KeypressHandler extends Actor
      */
     private void registerKeyRelease(Key key)
     {
-        // There is currently nothing to do.
+        keyFlashes[key.getColumn()].release();
     }
 }
