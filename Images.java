@@ -35,11 +35,81 @@ public class Images
             new GreenfootImage("mania-key2D.png"),
             new GreenfootImage("mania-key1D.png")
     };
-    
+
+    // Key Flash
+    public static final GreenfootImage KEY_FLASH = new GreenfootImage("mania-stage-light.png");
+
+    // Key Hit Score
+    public static final GreenfootImage[] KEY_HIT_SCORE =
+    {
+            new GreenfootImage("mania-hit300g.png"),
+            new GreenfootImage("mania-hit300.png"),
+            new GreenfootImage("mania-hit200.png"),
+            new GreenfootImage("mania-hit100.png"),
+            new GreenfootImage("mania-hit50.png"),
+            new GreenfootImage("mania-hit0.png")
+    };
+
+    // Key Numbers
+    public static final GreenfootImage[] KEY_HIT_SCORE_NUMBERS =
+    {
+            new GreenfootImage("mn-0.png"),
+            new GreenfootImage("mn-1.png"),
+            new GreenfootImage("mn-2.png"),
+            new GreenfootImage("mn-3.png"),
+            new GreenfootImage("mn-4.png"),
+            new GreenfootImage("mn-5.png"),
+            new GreenfootImage("mn-6.png"),
+            new GreenfootImage("mn-7.png"),
+            new GreenfootImage("mn-8.png"),
+            new GreenfootImage("mn-9.png")
+    };
+
+    // Score Numbers
+    public static final GreenfootImage[] SCORE_NUMBERS =
+    {
+            new GreenfootImage("score-0.png"),
+            new GreenfootImage("score-1.png"),
+            new GreenfootImage("score-2.png"),
+            new GreenfootImage("score-3.png"),
+            new GreenfootImage("score-4.png"),
+            new GreenfootImage("score-5.png"),
+            new GreenfootImage("score-6.png"),
+            new GreenfootImage("score-7.png"),
+            new GreenfootImage("score-8.png"),
+            new GreenfootImage("score-9.png"),
+    };
+
+    // Score Letters
+    public static final GreenfootImage SCORE_COMMA = new GreenfootImage("score-comma.png");
+    public static final GreenfootImage SCORE_DOT = new GreenfootImage("score-dot.png");
+    public static final GreenfootImage SCORE_PERCENT = new GreenfootImage("score-percent.png");
+    public static final GreenfootImage SCORE_X = new GreenfootImage("score-x.png");
+
+    // Score Entry Numbers
+    public static final GreenfootImage[] SCORE_ENTRY_NUMBERS =
+    {
+            new GreenfootImage("scoreentry-0.png"),
+            new GreenfootImage("scoreentry-1.png"),
+            new GreenfootImage("scoreentry-2.png"),
+            new GreenfootImage("scoreentry-3.png"),
+            new GreenfootImage("scoreentry-4.png"),
+            new GreenfootImage("scoreentry-5.png"),
+            new GreenfootImage("scoreentry-6.png"),
+            new GreenfootImage("scoreentry-7.png"),
+            new GreenfootImage("scoreentry-8.png"),
+            new GreenfootImage("scoreentry-9.png"),
+    };
+
+    // Score Entry Letters
+    public static final GreenfootImage SCORE_ENTRY_COMMA = new GreenfootImage("scoreentry-comma.png");
+    public static final GreenfootImage SCORE_ENTRY_DOT = new GreenfootImage("scoreentry-dot.png");
+    public static final GreenfootImage SCORE_ENTRY_PERCENT = new GreenfootImage("scoreentry-percent.png");
+    public static final GreenfootImage SCORE_ENTRY_X = new GreenfootImage("scoreentry-x.png");
+
     // Stage
     public static final GreenfootImage STAGE_LEFT = new GreenfootImage("mania-stage-left.png");
     public static final GreenfootImage STAGE_RIGHT = new GreenfootImage("mania-stage-right.png");
-    public static final GreenfootImage STAGE_LIGHT = new GreenfootImage("mania-stage-light.png");
     public static final GreenfootImage STAGE_HINT = new GreenfootImage("mania-stage-hint.png");
 
     // Counter
