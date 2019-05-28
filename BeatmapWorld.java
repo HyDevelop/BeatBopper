@@ -80,6 +80,7 @@ public class BeatmapWorld extends World
 
         // Initialize beatmap controller
         addObject(beatmapController = new BeatmapController(beatmap, scoreCounter), 0, 0);
+        beatmapController.init();
 
         // Draw background
         drawBackground();
