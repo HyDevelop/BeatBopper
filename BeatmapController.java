@@ -27,6 +27,9 @@ public class BeatmapController extends Actor
     /** Score counter. */
     private final ScoreCounter scoreCounter;
 
+    /** Key hit score */
+    private final KeyHitScore keyHitDisplayer;
+
     /**
      * Create a beatmap controller.
      */
@@ -37,7 +40,21 @@ public class BeatmapController extends Actor
         this.judgementCalculator = new JudgementCalculator(beatmap);
         this.scoreCounter = scoreCounter;
 
+        // Create key hit score object
+        keyHitDisplayer = new KeyHitScore();
+
         setImage((GreenfootImage) null);
+    }
+
+    /**
+     * Initialize position. This method is called in KeypressHandler when
+     * the key score object is created.
+     */
+    public void init()
+    {
+        // Put the key hit score displayer in the world
+        getWorld().addObject(keyHitDisplayer, 0, 0);
+        keyHitDisplayer.init();
     }
 
     /**
@@ -153,6 +170,9 @@ public class BeatmapController extends Actor
         {
             ((BeatmapWorld) getWorld()).drawOffsetLine(gameTime - note.getHitTime(), Color.PINK, 1);
         }
+
+        // Show hit image
+        keyHitDisplayer.hit(hit);
 
         // Register hit
         registerHitAndRemoveNote(note, hit);
