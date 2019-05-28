@@ -5,8 +5,8 @@ import greenfoot.GreenfootImage;
  * This class creates a Note object.
  *
  * @author Team APCSA 2019
+ * @author Andrew Vittiglio
  * @author Steve Rosario
- * @author Yijie Gui
  * @version 2019-05-23
  */
 @SuppressWarnings("WeakerAccess")
@@ -17,6 +17,8 @@ public class Note extends Actor
     private final int startTime;
     private final int hitTime;
     private final int column;
+    
+    private final long startTimeSystem;
 
     // Init note textures when this class is accessed for the first time.
     static
@@ -35,6 +37,8 @@ public class Note extends Actor
         this.startTime = hitTime - Constants.GAME_SPEED_MS;
         this.hitTime = hitTime;
         this.column = column;
+        
+        this.startTimeSystem = System.currentTimeMillis();
 
         setImage(Images.NOTES[column]);
     }
@@ -54,7 +58,11 @@ public class Note extends Actor
      */
     public void act() 
     {
-        // TODO: Fall to the correct location.
+        int elapseTime = (int) (System.currentTimeMillis() - startTimeSystem);
+
+        // Fall to the correct location.
+        double y = (double) elapseTime * Constants.GRAPHIC_NOTE_LANDING / Constants.GAME_SPEED_MS;
+        setLocation(getX(), (int) Math.round(y)); 
     }
 
     /**
@@ -62,7 +70,9 @@ public class Note extends Actor
      */
     public void init()
     {
-        // TODO: Initialize position
+        // Initialize position
+        int x = Constants.GRAPHIC_COL_OFFSET + Constants.GRAPHIC_TOTAL_LENGTH / 4 * column;
+        setLocation(x, 0);
     }
 
     /**
