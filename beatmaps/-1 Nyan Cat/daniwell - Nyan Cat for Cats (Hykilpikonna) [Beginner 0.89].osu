@@ -1,0 +1,92 @@
+osu file format v14
+
+[General]
+AudioFilename: audio.mp3
+AudioLeadIn: 0
+PreviewTime: -1
+Countdown: 0
+SampleSet: None
+StackLeniency: 0.7
+Mode: 3
+LetterboxInBreaks: 0
+SpecialStyle: 0
+WidescreenStoryboard: 1
+
+[Editor]
+DistanceSpacing: 1.1
+BeatDivisor: 4
+GridSize: 4
+TimelineZoom: 1
+
+[Metadata]
+Title:Nyan Cat for Cats
+TitleUnicode:Nyan Cat for Cats
+Artist:daniwell
+ArtistUnicode:daniwell
+Creator:Hykilpikonna
+Version:4K Beginner
+Source:
+Tags:meme
+BeatmapID:2008574
+BeatmapSetID:959377
+
+[Difficulty]
+HPDrainRate:7
+CircleSize:4
+OverallDifficulty:9
+ApproachRate:5
+SliderMultiplier:1.4
+SliderTickRate:1
+
+[Events]
+//Background and Video events
+0,0,"Nyan Osu.jpg",0,0
+//Break Periods
+//Storyboard Layer 0 (Background)
+//Storyboard Layer 1 (Fail)
+//Storyboard Layer 2 (Pass)
+//Storyboard Layer 3 (Foreground)
+//Storyboard Sound Samples
+
+[TimingPoints]
+0,422.537860661506,4,1,0,100,1,0
+
+
+[HitObjects]
+64,192,0,128,0,211:0:0:0:0:
+192,192,211,128,0,422:0:0:0:0:
+320,192,422,128,0,633:0:0:0:0:
+448,192,845,1,0,0:0:0:0:
+320,192,1267,1,0,0:0:0:0:
+192,192,1690,1,0,0:0:0:0:
+64,192,2112,1,0,0:0:0:0:
+448,192,2535,128,0,2957:0:0:0:0:
+320,192,2957,128,0,3380:0:0:0:0:
+64,192,3380,128,0,3802:0:0:0:0:
+192,192,3802,128,0,4225:0:0:0:0:
+320,192,4225,128,0,4647:0:0:0:0:
+448,192,4647,1,0,0:0:0:0:
+448,192,5070,1,0,0:0:0:0:
+320,192,5281,1,0,0:0:0:0:
+192,192,5492,1,0,0:0:0:0:
+64,192,5915,128,0,6338:0:0:0:0:
+192,192,6338,128,0,6760:0:0:0:0:
+448,192,6760,128,0,7183:0:0:0:0:
+320,192,7183,128,0,7605:0:0:0:0:
+192,192,7605,128,0,8028:0:0:0:0:
+64,192,8028,128,0,8450:0:0:0:0:
+448,192,8450,1,0,0:0:0:0:
+320,192,8873,1,0,0:0:0:0:
+64,192,9295,1,0,0:0:0:0:
+192,192,9507,1,0,0:0:0:0:
+320,192,9718,1,0,0:0:0:0:
+64,192,10140,128,0,10563:0:0:0:0:
+192,192,10563,128,0,10985:0:0:0:0:
+320,192,10985,1,0,0:0:0:0:
+448,192,11408,1,0,0:0:0:0:
+64,192,11831,1,0,0:0:0:0:
+192,192,12253,1,0,0:0:0:0:
+448,192,12676,1,0,0:0:0:0:
+320,192,12887,1,0,0:0:0:0:
+192,192,13098,1,0,0:0:0:0:
+64,192,13309,128,0,13521:0:0:0:0:
