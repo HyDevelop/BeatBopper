@@ -2,7 +2,7 @@ import greenfoot.Actor;
 import greenfoot.GreenfootImage;
 
 /**
- * TODO: This class display the hit value after a hit. Eg. Great, Cool, Good, Bad, etc.
+ * This class display the hit value after a hit. Eg. Great, Cool, Good, Bad, etc.
  *
  * @author Team APCSA 2019
  * @author Andy Ge
@@ -28,17 +28,9 @@ public class KeyHitScore extends Actor
      */
     public void init()
     {
-        // Loop through all the images
-        for (GreenfootImage scoreImage : Images.KEY_HIT_SCORE)
-        {
-            //TODO: Scale the score image
-        }
-
         // Initialize position
-        int keyLen = Constants.GRAPHIC_TOTAL_LENGTH / Constants.KEYS.length;
+        int keyLen = Constants.GRAPHIC_TOTAL_LENGTH / Constants.NUM_COLS;
         int x = Constants.GRAPHIC_COL_OFFSET + Constants.GRAPHIC_TOTAL_LENGTH / 2 - keyLen / 2;
-        System.out.println(x);
-        System.out.println(Images.KEY_HIT_SCORE[0].getWidth());
         int y = (int) Math.round(Constants.GRAPHIC_NOTE_LANDING * (2.0 / 3.0));
         setLocation(x, y);
     }
@@ -49,11 +41,11 @@ public class KeyHitScore extends Actor
     @Override
     public void act()
     {
-        // TODO: Reduce the transparency by Constants.GRAPHIC_KEY_HIT_SCORE_SPEED ( > 0)
+        // Reduce the transparency by Constants.GRAPHIC_KEY_HIT_SCORE_SPEED ( > 0)
         transparency -= Constants.GRAPHIC_KEY_HIT_SCORE_SPEED;
         if (transparency < 0) transparency = 0;
 
-        // TODO: Set the transparency of the image to the value in the transparency variable.
+        // Set the transparency of the image to the value in the transparency variable.
         getImage().setTransparency(transparency);
     }
 
@@ -64,10 +56,10 @@ public class KeyHitScore extends Actor
      */
     public void hit(int hitScore)
     {
-        // TODO: Set the image to the corresponding hit image (Images.KEY_HIT_SCORE[hitScore])
+        // Set the image to the corresponding hit image (Images.KEY_HIT_SCORE[hitScore])
         setImage(Images.KEY_HIT_SCORE[hitScore]);
-
-        // TODO: Reset the transparency variable to not transparent
+        
+        // Reset the transparency variable to not transparent
         transparency = 255;
     }
 }
