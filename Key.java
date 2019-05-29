@@ -2,13 +2,10 @@ import greenfoot.Actor;
 
 /**
  * A key actor visualizes key presses.
- *
- * TODO: Display splash (Also fade out)
  * 
  * @author Team APCSA 2019
  * @author Russell Doucet
  * @author Maanik George
- * @author Yijie Gui
  * @version 2019-05-21
  */
 @SuppressWarnings("WeakerAccess")
