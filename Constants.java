@@ -22,10 +22,10 @@ public class Constants
     public static final int GAME_SPEED_MS = 500;
 
     /** How many millis is from the supposed spawning to the actual spawning? */
-    public static final int GAME_SPAWNING_OFFSET = -50;
+    public static final int GAME_SPAWNING_OFFSET = -45;
 
     /** How many millis is from the supposed start of music to the actual start? */
-    public static final int GAME_MUSIC_OFFSET = -258;
+    public static final int GAME_MUSIC_OFFSET = -273;
 
     /** How much times easier is the judgement of the game? ( < 1 = harder) */
     public static final double GAME_EASY_MULTIPLIER = 2;
