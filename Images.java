@@ -65,6 +65,24 @@ public class Images
             new GreenfootImage("mn-9.png")
     };
 
+    // Frames for the hit animations
+    public static final GreenfootImage[] KEY_HIT_ANIMATION_FRAMES =
+    {
+            new GreenfootImage("lightingN-0.png"),
+            new GreenfootImage("lightingN-1.png"),
+            new GreenfootImage("lightingN-2.png"),
+            new GreenfootImage("lightingN-3.png"),
+            new GreenfootImage("lightingN-4.png"),
+            new GreenfootImage("lightingN-5.png"),
+            new GreenfootImage("lightingN-6.png"),
+            new GreenfootImage("lightingN-7.png"),
+            new GreenfootImage("lightingN-8.png"),
+            new GreenfootImage("lightingN-9.png"),
+            new GreenfootImage("lightingN-10.png"),
+            new GreenfootImage("lightingN-11.png"),
+            null
+    };
+
     // Score Numbers
     public static final GreenfootImage[] SCORE_NUMBERS =
     {
@@ -85,27 +103,6 @@ public class Images
     public static final GreenfootImage SCORE_DOT = new GreenfootImage("score-dot.png");
     public static final GreenfootImage SCORE_PERCENT = new GreenfootImage("score-percent.png");
     public static final GreenfootImage SCORE_X = new GreenfootImage("score-x.png");
-
-    // Score Entry Numbers
-    public static final GreenfootImage[] SCORE_ENTRY_NUMBERS =
-    {
-            new GreenfootImage("scoreentry-0.png"),
-            new GreenfootImage("scoreentry-1.png"),
-            new GreenfootImage("scoreentry-2.png"),
-            new GreenfootImage("scoreentry-3.png"),
-            new GreenfootImage("scoreentry-4.png"),
-            new GreenfootImage("scoreentry-5.png"),
-            new GreenfootImage("scoreentry-6.png"),
-            new GreenfootImage("scoreentry-7.png"),
-            new GreenfootImage("scoreentry-8.png"),
-            new GreenfootImage("scoreentry-9.png"),
-    };
-
-    // Score Entry Letters
-    public static final GreenfootImage SCORE_ENTRY_COMMA = new GreenfootImage("scoreentry-comma.png");
-    public static final GreenfootImage SCORE_ENTRY_DOT = new GreenfootImage("scoreentry-dot.png");
-    public static final GreenfootImage SCORE_ENTRY_PERCENT = new GreenfootImage("scoreentry-percent.png");
-    public static final GreenfootImage SCORE_ENTRY_X = new GreenfootImage("scoreentry-x.png");
 
     // Stage
     public static final GreenfootImage STAGE_LEFT = new GreenfootImage("mania-stage-left.png");
