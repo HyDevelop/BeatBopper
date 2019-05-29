@@ -55,7 +55,7 @@ public class Key extends Actor
     private void initPositionAndScale()
     {
         // Scale image
-        int keyLen = Constants.GRAPHIC_TOTAL_LENGTH / Constants.KEYS.length;
+        int keyLen = Constants.GRAPHIC_TOTAL_LENGTH / Constants.NUM_COLS;
         getImage().scale(keyLen, Constants.GRAPHIC_KEY_HEIGHT);
 
         // Initialize position
