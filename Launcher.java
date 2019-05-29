@@ -61,6 +61,7 @@ public class Launcher
             // Make world
             BeatmapWorld beatmapWorld = new BeatmapWorld(beatmapSet, difficulty);
             Greenfoot.setWorld(beatmapWorld);
+            beatmapWorld.startGame();
 
         }).start();
     }
@@ -70,6 +71,8 @@ public class Launcher
      */
     public static void launchTest()
     {
-        Greenfoot.setWorld(new BeatmapWorld("398366", "Normal"));
+        BeatmapWorld world = new BeatmapWorld("398366", "Normal");
+        Greenfoot.setWorld(world);
+        world.startGame();
     }
 }
