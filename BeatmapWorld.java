@@ -73,8 +73,8 @@ public class BeatmapWorld extends World
         this.beatmap = beatmap;
 
         // Creates a new counter and adds it to the world
-        scoreCounter = new ScoreCounter("Score: ", beatmap);
-        addObject(scoreCounter, Constants.WIDTH - 100, 20);
+        scoreCounter = new ScoreCounter(beatmap);
+        scoreCounter.initDisplayers(this);
 
         // Initialize keypress handler
         addObject(keypressHandler = new KeypressHandler(), 0, 0);
