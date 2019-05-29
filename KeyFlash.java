@@ -6,7 +6,7 @@ import greenfoot.GreenfootImage;
  * The algorithm should be exactly the same with Key.
  *
  * @author Team APCSA 2019
- * @author Steve
+ * @author Steve Rosario
  * @since 2019-05-24 14:12
  */
 @SuppressWarnings("WeakerAccess")
@@ -40,7 +40,7 @@ public class KeyFlash extends Actor
     public void init()
     {
         // Scale image
-        int keyLen = Constants.GRAPHIC_TOTAL_LENGTH / Constants.KEYS.length;
+        int keyLen = Constants.GRAPHIC_TOTAL_LENGTH / Constants.NUM_COLS;
         getImage().scale(keyLen, Constants.GRAPHIC_NOTE_LANDING);
 
         // Initialize position
@@ -55,14 +55,14 @@ public class KeyFlash extends Actor
     @Override
     public void act()
     {
-        // TODO: If not pressing, reduce the transparency by Constants.GRAPHIC_KEY_FLASH_SPEED ( > 0)
+        // If not pressing, reduce the transparency by Constants.GRAPHIC_KEY_FLASH_SPEED ( > 0)
         if (!isPressing)
         {
             transparency -= Constants.GRAPHIC_KEY_FLASH_SPEED;
             if (transparency < 0) transparency = 0;
         }
 
-        // TODO: Set the transparency of the image.
+        // Set the transparency of the image.
         getImage().setTransparency(transparency);
     }
 
@@ -71,10 +71,10 @@ public class KeyFlash extends Actor
      */
     public void press()
     {
-        // TODO: Reset transparency to not transparent
+        // Reset transparency to not transparent
         transparency = 255;
 
-        // TODO: Update state of isPressing
+        // Update state of isPressing
         isPressing = true;
     }
 
@@ -83,7 +83,7 @@ public class KeyFlash extends Actor
      */
     public void release()
     {
-        // TODO: Update state of isPressing
+        // Update state of isPressing
         isPressing = false;
     }
 }
