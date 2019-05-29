@@ -3,6 +3,8 @@ import greenfoot.GreenfootImage;
 import greenfoot.World;
 
 import java.io.File;
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * This is the gameplay stage.
@@ -101,11 +103,17 @@ public class BeatmapWorld extends World
     {
         // Show wallpaper
         {
+            // Get wallpaper of beatmap
+            List<String> fileNameList = Arrays.asList(beatmap.getFile().getParentFile().list());
+            String backgroundSuffix = fileNameList.contains("background.jpg") ? "jpg" : "png";
+            GreenfootImage wallpaper = new GreenfootImage("../beatmaps/" +
+                    beatmap.getFile().getParentFile().getName() + "/background." + backgroundSuffix);
+
             // Simple proportions calculations right?
-            int origWidth = Images.WALLPAPER.getWidth();
-            int origHeight = Images.WALLPAPER.getHeight();
-            Images.WALLPAPER.scale((int) (1.0 * origWidth / origHeight * Constants.HEIGHT), Constants.HEIGHT);
-            getBackground().drawImage(Images.WALLPAPER, 0, 0);
+            int origWidth = wallpaper.getWidth();
+            int origHeight = wallpaper.getHeight();
+            wallpaper.scale((int) (1.0 * origWidth / origHeight * Constants.HEIGHT), Constants.HEIGHT);
+            getBackground().drawImage(wallpaper, 0, 0);
         }
 
         // Darken wallpaper with a black overlay
@@ -130,7 +138,7 @@ public class BeatmapWorld extends World
             right.scale(right.getWidth(), Constants.HEIGHT);
 
             // Calculate x and draw image
-            int x = Constants.GRAPHIC_COL_OFFSET - Constants.GRAPHIC_TOTAL_LENGTH / Constants.KEYS.length / 2;
+            int x = Constants.GRAPHIC_COL_OFFSET - Constants.GRAPHIC_TOTAL_LENGTH / Constants.NUM_COLS / 2;
             getBackground().drawImage(left, x - left.getWidth(), 0);
             getBackground().drawImage(right, x + Constants.GRAPHIC_TOTAL_LENGTH, 0);
         }
