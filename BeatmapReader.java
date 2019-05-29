@@ -34,26 +34,12 @@ public class BeatmapReader
             String line = buf.readLine();
             boolean startReading = false;
 
-            // Read properties to a map.
-            Map<String, String> properties = new HashMap<>();
-
             while(line != null)
             {
                 if (!startReading)
                 {
                     // Start of HitObjects section
                     if (line.equals("[HitObjects]")) startReading = true;
-
-                    // Read properties
-                    line = line.replace(": ", ":");
-                    if (line.contains(":"))
-                    {
-                        String[] split = line.split(":");
-                        if (split.length == 2)
-                        {
-                            properties.put(split[0], split[1]);
-                        }
-                    }
                 }
                 else
                 {
@@ -83,6 +69,9 @@ public class BeatmapReader
                 line = buf.readLine();
             }
 
+            // Read properties.
+            Map<String, String> properties = readProperties(file);
+
             // Validate properties.
             validateProperties(properties);
             beatmap.setProperties(properties);
@@ -90,6 +79,10 @@ public class BeatmapReader
             // Set beatmap music
             File audio = new File(file.getParentFile(), properties.get("AudioFilename"));
             beatmap.setMusic(SoundFactory.getInstance().createSound(audio.toURI().toString(), false));
+
+            // Set meta data
+            beatmap.setFile(file);
+            beatmap.setId(Integer.parseInt(file.getParentFile().getName().split(" ")[0]));
         }
         catch (FileNotFoundException e)
         {
@@ -106,6 +99,57 @@ public class BeatmapReader
     }
 
     /**
+     * Read the properties from a beatmap.
+     *
+     * @param file Beatmap file
+     * @return Properties
+     */
+    public static Map<String, String> readProperties(File file)
+    {
+        // Read properties to a map.
+        Map<String, String> properties = new HashMap<>();
+
+        try
+        {
+            // File reader stuff
+            BufferedReader buf = new BufferedReader(new InputStreamReader(new FileInputStream(file)));
+            String line = buf.readLine();
+
+            while(line != null)
+            {
+                // Start of HitObjects section
+                if (line.equals("[HitObjects]")) break;
+
+                // Read properties
+                line = line.replace(": ", ":");
+                if (line.contains(":"))
+                {
+                    String[] split = line.split(":");
+                    if (split.length == 2)
+                    {
+                        properties.put(split[0], split[1]);
+                    }
+                }
+
+                // Read next line.
+                line = buf.readLine();
+            }
+        }
+        catch (FileNotFoundException e)
+        {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(null, "ERROR: File not found");
+        }
+        catch (IOException e)
+        {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(null, "ERROR: File read error");
+        }
+
+        return properties;
+    }
+
+    /**
      * Validate the properties of a beatmap.
      *
      * @param properties The properties.
@@ -117,8 +161,8 @@ public class BeatmapReader
             throw new RuntimeException("Error: This beatmap is not mania.");
 
         // Make sure it's the right key count. (CircleSize in mode 3 means key count)
-        if (!properties.get("CircleSize").equals("" + Constants.KEYS.length))
-            throw new RuntimeException("Error: This beatmap is not " + Constants.KEYS.length + " keys.");
+        if (!properties.get("CircleSize").equals("" + Constants.NUM_COLS))
+            throw new RuntimeException("Error: This beatmap is not " + Constants.NUM_COLS + " keys.");
 
         // Make sure it has audio
         if (!properties.containsKey("AudioFilename"))
