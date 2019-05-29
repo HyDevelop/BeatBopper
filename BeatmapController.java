@@ -75,10 +75,14 @@ public class BeatmapController extends Actor
         int gameTime = timer.getTotalDuration();
 
         // Spawn notes.
-        for (int i = 0; i < Constants.NUM_COLS; i++)
+        for (ArrayList<NoteInformation> col : beatmap.getFuture())
         {
-            // TODO: Optimize this (used new ArrayList because java.util.ConcurrentModificationException)
-            for (NoteInformation noteInfo : new ArrayList<>(beatmap.getFuture(i)))
+
+            // Notes to remove. Bypassed java.util.ConcurrentModificationException
+            ArrayList<NoteInformation> toRemove = new ArrayList<>();
+
+            // Loop through all the notes
+            for (NoteInformation noteInfo : col)
             {
                 // Within the speed range.
                 if (noteInfo.getTime() + Constants.GAME_SPAWNING_OFFSET - gameTime > Constants.GAME_SPEED_MS)
@@ -88,22 +92,32 @@ public class BeatmapController extends Actor
 
                 // Spawn the note to the top.
                 spawnNote(noteInfo);
+                toRemove.add(noteInfo);
             }
+
+            // Remove already spawn notes.
+            col.removeAll(toRemove);
         }
 
         // Register non-hit notes as missed.
         for (ArrayList<Note> col : beatmap.getPresent())
         {
-            // TODO: Optimize this (used new ArrayList because java.util.ConcurrentModificationException)
-            for (Note note : new ArrayList<>(col))
+            // Notes to remove. Bypassed java.util.ConcurrentModificationException
+            ArrayList<Note> toRemove = new ArrayList<>();
+
+            // Loop through all the notes
+            for (Note note : col)
             {
                 if (judgementCalculator.isMissed(note.getHitTime(), gameTime))
                 {
                     // Register a missed note.
-                    // TODO: Test this
-                    registerHitAndRemoveNote(note, 5);
+                    registerHit(note, 5);
+                    toRemove.add(note);
                 }
             }
+
+            // Remove already registered notes.
+            col.removeAll(toRemove);
         }
     }
 
@@ -121,7 +135,9 @@ public class BeatmapController extends Actor
 
         // Put in present and remove from future.
         beatmap.getPresent(noteInfo.getColumn()).add(note);
-        beatmap.getFuture(noteInfo.getColumn()).remove(noteInfo);
+
+        // java.util.ConcurrentModificationException
+        // beatmap.getFuture(noteInfo.getColumn()).remove(noteInfo);
     }
 
     /**
@@ -130,7 +146,7 @@ public class BeatmapController extends Actor
      * @param note Present note actor.
      * @param hitScore Hit score (From 0 to 5)
      */
-    private void registerHitAndRemoveNote(Note note, int hitScore)
+    private void registerHit(Note note, int hitScore)
     {
         // Hit
         scoreCounter.hit(hitScore);
@@ -139,8 +155,10 @@ public class BeatmapController extends Actor
         note.getWorld().removeObject(note);
 
         // Move from present to past
-        beatmap.getPresent(note.getColumn()).remove(note);
         beatmap.getPast(note.getColumn()).add(new NoteInformation(note));
+
+        // java.util.ConcurrentModificationException
+        // beatmap.getPresent(note.getColumn()).remove(note);
     }
 
     /**
@@ -175,7 +193,7 @@ public class BeatmapController extends Actor
         keyHitDisplayer.hit(hit);
 
         // Register hit
-        registerHitAndRemoveNote(note, hit);
+        registerHit(note, hit);
     }
 
     // ###################
