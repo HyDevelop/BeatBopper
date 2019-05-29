@@ -12,7 +12,7 @@ import greenfoot.GreenfootImage;
 @SuppressWarnings("WeakerAccess")
 public class Note extends Actor
 {
-    private static final int NOTE_WIDTH = Constants.GRAPHIC_TOTAL_LENGTH / Constants.KEYS.length;
+    private static final int NOTE_WIDTH = Constants.GRAPHIC_TOTAL_LENGTH / Constants.NUM_COLS;
 
     private final int startTime;
     private final int hitTime;
@@ -37,7 +37,7 @@ public class Note extends Actor
         this.startTime = hitTime - Constants.GAME_SPEED_MS;
         this.hitTime = hitTime;
         this.column = column;
-        
+
         this.startTimeSystem = System.currentTimeMillis();
 
         setImage(Images.NOTES[column]);
@@ -52,17 +52,16 @@ public class Note extends Actor
     {
         this(noteInfo.getTime(), noteInfo.getColumn());
     }
-    
+
     /**
      * The note fall down
      */
-    public void act() 
+    public void act()
     {
         int elapseTime = (int) (System.currentTimeMillis() - startTimeSystem);
 
         // Fall to the correct location.
-        double y = (double) elapseTime * Constants.GRAPHIC_NOTE_LANDING / Constants.GAME_SPEED_MS;
-        setLocation(getX(), (int) Math.round(y)); 
+        setLocation(getX(), (int) Math.round((double) elapseTime / Constants.GAME_SPEED_MS * Constants.GRAPHIC_NOTE_LANDING));
     }
 
     /**
@@ -71,7 +70,7 @@ public class Note extends Actor
     public void init()
     {
         // Initialize position
-        int x = Constants.GRAPHIC_COL_OFFSET + Constants.GRAPHIC_TOTAL_LENGTH / 4 * column;
+        int x = Constants.GRAPHIC_COL_OFFSET + NOTE_WIDTH * column;
         setLocation(x, 0);
     }
 
