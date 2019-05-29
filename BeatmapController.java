@@ -75,11 +75,13 @@ public class BeatmapController extends Actor
         int gameTime = timer.getTotalDuration();
 
         // Spawn notes.
-        for (int i = 0; i < Constants.NUM_COLS; i++)
+        for (ArrayList<NoteInformation> col : beatmap.getFuture())
         {
-            // TODO: Optimize this (used new ArrayList because java.util.ConcurrentModificationException)
-            for (NoteInformation noteInfo : new ArrayList<>(beatmap.getFuture(i)))
+            // Used this to bypass java.util.ConcurrentModificationException
+            for (int i = 0; i < col.size(); i++)
             {
+                NoteInformation noteInfo = col.get(i);
+
                 // Within the speed range.
                 if (noteInfo.getTime() + Constants.GAME_SPAWNING_OFFSET - gameTime > Constants.GAME_SPEED_MS)
                 {
@@ -88,20 +90,24 @@ public class BeatmapController extends Actor
 
                 // Spawn the note to the top.
                 spawnNote(noteInfo);
+                i--;
             }
         }
 
         // Register non-hit notes as missed.
         for (ArrayList<Note> col : beatmap.getPresent())
         {
-            // TODO: Optimize this (used new ArrayList because java.util.ConcurrentModificationException)
-            for (Note note : new ArrayList<>(col))
+            // Used this to bypass java.util.ConcurrentModificationException
+            for (int i = 0; i < col.size(); i++)
             {
+                Note note = col.get(i);
+
+                // Note is missed
                 if (judgementCalculator.isMissed(note.getHitTime(), gameTime))
                 {
                     // Register a missed note.
-                    // TODO: Test this
                     registerHitAndRemoveNote(note, 5);
+                    i--;
                 }
             }
         }
