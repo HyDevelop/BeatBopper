@@ -147,6 +147,9 @@ public class BeatmapController extends Actor
         // Move from present to past
         beatmap.getPresent(note.getColumn()).remove(note);
         beatmap.getPast(note.getColumn()).add(new NoteInformation(note));
+
+        // Show hit image
+        keyHitDisplayer.hit(hitScore);
     }
 
     /**
@@ -176,9 +179,6 @@ public class BeatmapController extends Actor
         {
             ((BeatmapWorld) getWorld()).drawOffsetLine(gameTime - note.getHitTime(), Color.PINK, 1);
         }
-
-        // Show hit image
-        keyHitDisplayer.hit(hit);
 
         // Register hit
         registerHitAndRemoveNote(note, hit);
