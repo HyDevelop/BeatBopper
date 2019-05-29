@@ -73,6 +73,16 @@ public class MainMenu extends World
             // Draw it
             getBackground().drawImage(text, x, y);
         }
+        
+        // Put in Key bind editors
+        {
+            for (int i = 0; i < Constants.NUM_COLS; i++)
+            {
+                KeyBindEditor keyBindEditor = new KeyBindEditor(i);
+                addObject(keyBindEditor, 0, 0);
+                keyBindEditor.init();
+            }
+        }
     }
 
     /**
