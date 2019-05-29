@@ -1,13 +1,8 @@
-import greenfoot.Actor;
-import greenfoot.Color;
-import greenfoot.GreenfootImage;
+import greenfoot.World;
 
 /**
- * A Counter class that allows you to display a numerical value on screen.
- * 
- * The Counter is an actor, so you will need to create it, and then add it to
- * the world in Greenfoot.  If you keep a reference to the Counter then you
- * can adjust its value.
+ * This score counter class keeps the scores. It contains ScoreDisplayer
+ * that displays the score on the screen.
  * 
  * @author Team APCSA 2019
  * @author Andy Ge
@@ -15,11 +10,8 @@ import greenfoot.GreenfootImage;
  * @version 2019-05-22
  */
 @SuppressWarnings("WeakerAccess")
-public class ScoreCounter extends Actor
+public class ScoreCounter
 {
-    private static final Color TRANSPARENT = new Color(0,0,0,0);
-    private String prefix;
-
     /**
      * This array stores the count of all the hit scores:
      * scores[0]: Max
@@ -53,17 +45,38 @@ public class ScoreCounter extends Actor
     /** Bonus (Live updating) */
     private double bonus = 100;
 
+    /** Accuracy displayer */
+    private final ScoreDisplayerAccuracy accuracyDisplayer;
+
     /**
      * Create a new counter, initialised to 0.
      *
-     * @param prefix of the counter
+     * @param beatmap The beatmap
      */
-    public ScoreCounter(String prefix, Beatmap beatmap)
+    public ScoreCounter(Beatmap beatmap)
     {
-        this.prefix = prefix;
         this.scoresHitOrder = new int[beatmap.countTotalObjects()];
         this.halfNoteRatio = ScoreCalculator.calculateHalfNoteRatio(beatmap.countTotalObjects());
-        updateImage();
+
+        // Create displayers
+        accuracyDisplayer = new ScoreDisplayerAccuracy(this);
+    }
+
+    /**
+     * Initialize score displayers.
+     */
+    public void initDisplayers(World world)
+    {
+        world.addObject(accuracyDisplayer, 0, 0);
+        accuracyDisplayer.init();
+    }
+
+    /**
+     * Update image for all the displayers.
+     */
+    private void updateImage()
+    {
+        accuracyDisplayer.update();
     }
 
     /**
@@ -83,23 +96,6 @@ public class ScoreCounter extends Actor
         totalScore += ScoreCalculator.calculateHitScore(halfNoteRatio, bonus, hit);
 
         updateImage();
-    }
-
-    /**
-     * Updates the image on screen to show the current value.
-     */
-    private void updateImage()
-    {
-        GreenfootImage image = new GreenfootImage(Images.COUNTER);
-        GreenfootImage text = new GreenfootImage(prefix + (int) totalScore, 22, Color.BLACK, TRANSPARENT);
-
-        if (text.getWidth() > image.getWidth() - 20)
-        {
-            image.scale(text.getWidth() + 20, image.getHeight());
-        }
-
-        image.drawImage(text, (image.getWidth() - text.getWidth()) / 2, (image.getHeight() - text.getHeight()) / 2);
-        setImage(image);
     }
 
     // ###################
@@ -134,5 +130,10 @@ public class ScoreCounter extends Actor
     public double getHalfNoteRatio()
     {
         return halfNoteRatio;
+    }
+
+    public ScoreDisplayerAccuracy getAccuracyDisplayer()
+    {
+        return accuracyDisplayer;
     }
 }
