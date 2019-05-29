@@ -75,7 +75,7 @@ public class BeatmapController extends Actor
         int gameTime = timer.getTotalDuration();
 
         // Spawn notes.
-        for (int i = 0; i < Constants.KEYS.length; i++)
+        for (int i = 0; i < Constants.NUM_COLS; i++)
         {
             // TODO: Optimize this (used new ArrayList because java.util.ConcurrentModificationException)
             for (NoteInformation noteInfo : new ArrayList<>(beatmap.getFuture(i)))

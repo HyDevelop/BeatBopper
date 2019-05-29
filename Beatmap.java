@@ -47,11 +47,11 @@ public class Beatmap
     public Beatmap()
     {
         // Initialize array lists.
-        future = new ArrayList[Constants.KEYS.length];
-        present = new ArrayList[Constants.KEYS.length];
-        past = new ArrayList[Constants.KEYS.length];
+        future = new ArrayList[Constants.NUM_COLS];
+        present = new ArrayList[Constants.NUM_COLS];
+        past = new ArrayList[Constants.NUM_COLS];
 
-        for (int i = 0; i < Constants.KEYS.length; i++)
+        for (int i = 0; i < Constants.NUM_COLS; i++)
         {
             future[i] = new ArrayList<>();
             present[i] = new ArrayList<>();
@@ -67,7 +67,7 @@ public class Beatmap
     public int countTotalObjects()
     {
         int total = 0;
-        for (int i = 0; i < Constants.KEYS.length; i++)
+        for (int i = 0; i < Constants.NUM_COLS; i++)
         {
             total += past[i].size() + present[i].size() + future[i].size();
         }
