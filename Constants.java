@@ -58,13 +58,28 @@ public class Constants
     public static final int GRAPHIC_WALLPAPER_DARKEN = (int) (255 * 0.7);
 
     /** Song selection menu: how many songs are displayed each row? */
-    public static final int GRAPHIC_SELECTION_ROWS = 5;
+    public static final int SELECTION_ROWS = 5;
 
     /** Song selection menu: how many songs are displayed each col? */
-    public static final int GRAPHIC_SELECTION_COLS = 3;
+    public static final int SELECTION_COLS = 3;
 
     /** Song selection menu: Minimum spacing between two icons. */
-    public static final int GRAPHIC_SELECTION_MIN_SPACING = 20;
+    public static final int SELECTION_MIN_SPACING = 30;
+
+    /** Song selection menu: Padding on the top. */
+    public static final int SELECTION_TOP_PADDING = 20;
+
+    /** Song selection menu: Side length of the song selection covers */
+    public static final int SELECTION_COVER_SIDE_LENGTH = 204;
+
+    /** Song selection menu: Side length of the song selection covers */
+    public static final int SELECTION_COVER_TEXT_HEIGHT = 30;
+
+    /** Song selection menu: Difficulty button spacing */
+    public static final int SELECTION_DIFF_SPACING = 20;
+
+    /** Song selection menu: Difficulty button height ratio */
+    public static final double SELECTION_DIFF_HEIGHT_RATIO = 30.0 / (174.0 / 3.0);
 
     /** Keys (in 4 columns) */
     public static final String[] KEYS = {"D", "G", "J", "L"};
