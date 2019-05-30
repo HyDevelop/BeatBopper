@@ -48,6 +48,12 @@ public class ScoreCounter
     /** Bonus (Live updating) */
     private double bonus = 100;
 
+    /** Combo (Number of continuous hits) (Live updating) */
+    private int combo = 0;
+
+    /** Maximum combo (Live updating) */
+    private int maxCombo = 0;
+
     // Used transient because I used GSON for testing, and it throws an exception when serializing images.
     /** Accuracy displayer */
     private transient final ScoreDisplayerAccuracy accuracyDisplayer;
@@ -57,6 +63,9 @@ public class ScoreCounter
 
     /** Total Score Displayer */
     private transient final ScoreDisplayerTotal totalDisplayer;
+
+    /** Combo Displayer */
+    private transient final ScoreDisplayerCombo comboDisplayer;
 
     /**
      * Create a new counter, initialised to 0.
@@ -73,6 +82,7 @@ public class ScoreCounter
         accuracyDisplayer = new ScoreDisplayerAccuracy();
         bonusDisplayer = new ScoreDisplayerBonus();
         totalDisplayer = new ScoreDisplayerTotal();
+        comboDisplayer = new ScoreDisplayerCombo();
     }
 
     /**
@@ -90,6 +100,9 @@ public class ScoreCounter
 
         world.addObject(totalDisplayer, 0, 0);
         totalDisplayer.init();
+
+        world.addObject(comboDisplayer, 0, 0);
+        comboDisplayer.init();
     }
 
     /**
@@ -100,6 +113,7 @@ public class ScoreCounter
         accuracyDisplayer.update(ScoreCalculator.calculateAccuracy(this));
         bonusDisplayer.update(bonus);
         totalDisplayer.update((int) Math.round(totalScore + 0.5));
+        comboDisplayer.update((int) Math.round(totalScore + 0.5));
     }
 
     /**
@@ -118,7 +132,20 @@ public class ScoreCounter
         bonus = ScoreCalculator.calculateNewBonus(bonus, hit);
         totalScore += ScoreCalculator.calculateHitScore(halfNoteRatio, bonus, hit);
 
+        // > 4 does not count as hit.
+        if (hit > 4) resetCombo();
+
+        // Update image
         updateImage();
+    }
+
+    /**
+     * Reset the combo.
+     */
+    private void resetCombo()
+    {
+        maxCombo = Math.max(combo, maxCombo);
+        combo = 0;
     }
 
     // ###################
@@ -168,5 +195,15 @@ public class ScoreCounter
     public ScoreDisplayerTotal getTotalDisplayer()
     {
         return totalDisplayer;
+    }
+
+    public int getCombo()
+    {
+        return combo;
+    }
+
+    public int getMaxCombo()
+    {
+        return maxCombo;
     }
 }
