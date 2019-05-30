@@ -36,9 +36,29 @@ public abstract class NumberDisplayer extends Actor
      */
     public NumberDisplayer(GreenfootImage[] numberImages, GreenfootImage dotImage)
     {
-        this.numberImages = numberImages;
-        this.dotImage = dotImage;
+        this(numberImages, dotImage, 1);
+    }
+
+    /**
+     * Construct a score displayer.
+     *
+     * @param numberImages Numbers
+     * @param dotImage Image of the dot.
+     * @param scale Scale of those images.
+     */
+    public NumberDisplayer(GreenfootImage[] numberImages, GreenfootImage dotImage, double scale)
+    {
+        this.numberImages = new GreenfootImage[10];
+        this.dotImage = new GreenfootImage(dotImage);
         currentRenderedWidth = 0;
+
+        // Scale it
+        this.dotImage.scale((int) (dotImage.getWidth() * scale), (int) (dotImage.getHeight() * scale));
+        for (int i = 0; i < this.numberImages.length; i++)
+        {
+            GreenfootImage image = this.numberImages[i] = new GreenfootImage(numberImages[i]);
+            image.scale((int) (image.getWidth() * scale), (int) (image.getHeight() * scale));
+        }
 
         // Calculate max height
         int maxHeight = 0;
