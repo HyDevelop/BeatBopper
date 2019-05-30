@@ -45,8 +45,15 @@ public class ScoreCounter
     /** Bonus (Live updating) */
     private double bonus = 100;
 
+    // Used transient because I used GSON for testing, and it throws an exception when serializing images.
     /** Accuracy displayer */
-    private final ScoreDisplayerAccuracy accuracyDisplayer;
+    private transient final ScoreDisplayerAccuracy accuracyDisplayer;
+
+    /** Bonus displayer */
+    private transient final ScoreDisplayerBonus bonusDisplayer;
+
+    /** Total Score Displayer */
+    private transient final ScoreDisplayerTotal totalDisplayer;
 
     /**
      * Create a new counter, initialised to 0.
@@ -59,7 +66,9 @@ public class ScoreCounter
         this.halfNoteRatio = ScoreCalculator.calculateHalfNoteRatio(beatmap.countTotalObjects());
 
         // Create displayers
-        accuracyDisplayer = new ScoreDisplayerAccuracy(this);
+        accuracyDisplayer = new ScoreDisplayerAccuracy();
+        bonusDisplayer = new ScoreDisplayerBonus();
+        totalDisplayer = new ScoreDisplayerTotal();
     }
 
     /**
@@ -71,6 +80,12 @@ public class ScoreCounter
     {
         world.addObject(accuracyDisplayer, 0, 0);
         accuracyDisplayer.init();
+
+        world.addObject(bonusDisplayer, 0, 0);
+        bonusDisplayer.init();
+
+        world.addObject(totalDisplayer, 0, 0);
+        totalDisplayer.init();
     }
 
     /**
@@ -78,7 +93,9 @@ public class ScoreCounter
      */
     private void updateImage()
     {
-        accuracyDisplayer.update();
+        accuracyDisplayer.update(ScoreCalculator.calculateAccuracy(this));
+        bonusDisplayer.update(bonus);
+        totalDisplayer.update((int) Math.round(totalScore + 0.5));
     }
 
     /**
@@ -137,5 +154,15 @@ public class ScoreCounter
     public ScoreDisplayerAccuracy getAccuracyDisplayer()
     {
         return accuracyDisplayer;
+    }
+
+    public ScoreDisplayerBonus getBonusDisplayer()
+    {
+        return bonusDisplayer;
+    }
+
+    public ScoreDisplayerTotal getTotalDisplayer()
+    {
+        return totalDisplayer;
     }
 }
