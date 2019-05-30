@@ -76,9 +76,9 @@ public class BeatmapReader
             validateProperties(properties);
             beatmap.setProperties(properties);
 
-            // Set beatmap music
+            // Set beatmap music (There's index out of bounds bug when Greenfoot reads mp3)
             File audio = new File(file.getParentFile(), properties.get("AudioFilename"));
-            beatmap.setMusic(SoundFactory.getInstance().createSound(audio.toURI().toString(), false));
+            beatmap.setMusic(SoundFactory.getInstance().createSound(audio.toURI().toString().replace("mp3", "wav"), false));
 
             // Set meta data
             beatmap.setFile(file);
