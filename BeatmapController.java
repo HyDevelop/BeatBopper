@@ -33,6 +33,9 @@ public class BeatmapController extends Actor
     /** Key hit animation displayers, in a row */
     private final KeyHitAnimation[] keyHitAnimations;
 
+    /** Done or not */
+    private boolean done;
+
     /**
      * Create a beatmap controller.
      *
@@ -86,6 +89,8 @@ public class BeatmapController extends Actor
      */
     public void act()
     {
+        if (done) return;
+
         // Get time
         int gameTime = timer.getTotalDuration();
 
@@ -125,6 +130,33 @@ public class BeatmapController extends Actor
                     i--;
                 }
             }
+        }
+
+        // Check if done.
+        if (beatmap.isDone())
+        {
+            done = true;
+
+            /* Output JSON object for debug.
+            try
+            {
+                System.out.println(new Gson().toJson(scoreCounter));
+                new Gson().toJson(scoreCounter, new FileWriter("./scores/score-counter-object-" + System.currentTimeMillis() + ".json"));
+            }
+            catch (IOException e)
+            {
+                e.printStackTrace();
+            }*/
+
+            // Remove score objects
+            getWorld().removeObject(scoreCounter.getAccuracyDisplayer());
+            getWorld().removeObject(scoreCounter.getBonusDisplayer());
+            getWorld().removeObject(scoreCounter.getTotalDisplayer());
+
+            // Create score report.
+            ScoreReport report = new ScoreReport(scoreCounter);
+            getWorld().addObject(report, Constants.WIDTH / 2, Constants.HEIGHT / 2);
+            report.draw();
         }
     }
 
@@ -222,5 +254,10 @@ public class BeatmapController extends Actor
     public ScoreCounter getScoreCounter()
     {
         return scoreCounter;
+    }
+
+    public boolean isDone()
+    {
+        return done;
     }
 }
