@@ -122,13 +122,7 @@ public class NumberDisplayer extends Actor
     public void drawNumber(int number)
     {
         // Get the digits in a stack
-        LinkedList<Integer> stack = new LinkedList<>();
-        if (number == 0) stack.push(0);
-        else while (number > 0)
-        {
-            stack.push(number % 10);
-            number /= 10;
-        }
+        LinkedList<Integer> stack = toDigits(number);
 
         // Draw them in reverse order
         while (!stack.isEmpty())
@@ -163,6 +157,26 @@ public class NumberDisplayer extends Actor
     {
         getImage().clear();
         currentRenderedWidth = 0;
+    }
+
+    /**
+     * Convert an integer to a list of digits.
+     *
+     * @param number Number
+     * @return Stack of digits.
+     */
+    public static LinkedList<Integer> toDigits(int number)
+    {
+        // Get the digits in a stack
+        LinkedList<Integer> stack = new LinkedList<>();
+        if (number == 0) stack.push(0);
+        else while (number > 0)
+        {
+            stack.push(number % 10);
+            number /= 10;
+        }
+
+        return stack;
     }
 
     // ###################
