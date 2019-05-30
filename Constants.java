@@ -27,7 +27,7 @@ public class Constants
     /** How many millis is from the supposed start of music to the actual start? */
     public static final int GAME_MUSIC_OFFSET = -273;
 
-    /** How much times easier is the judgement of the game? ( < 1 = harder) */
+    /** How much times easier is the judgement of the game? (less than 1 = harder) */
     public static final double GAME_EASY_MULTIPLIER = 2;
 
     /** Where does the first col start? */
@@ -53,6 +53,9 @@ public class Constants
 
     /** Key hit score disappear speed */
     public static final int GRAPHIC_KEY_HIT_SCORE_SPEED = 8;
+
+    /** Score displayer x padding (How far are they from the boarder?) */
+    public static final int GRAPHIC_SCORE_X_PADDING = 30;
 
     /** Darken the wallpaper */
     public static final int GRAPHIC_WALLPAPER_DARKEN = (int) (255 * 0.7);
