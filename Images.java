@@ -104,6 +104,20 @@ public class Images
     public static final GreenfootImage SCORE_PERCENT = new GreenfootImage("score-percent.png");
     public static final GreenfootImage SCORE_X = new GreenfootImage("score-x.png");
 
+    // Ranking Letter Scores
+    public static final GreenfootImage[] RANKING_LETTER_SCORES =
+    {
+            new GreenfootImage("ranking-X.png"),
+            new GreenfootImage("ranking-S.png"),
+            new GreenfootImage("ranking-A.png"),
+            new GreenfootImage("ranking-B.png"),
+            new GreenfootImage("ranking-C.png"),
+            new GreenfootImage("ranking-D.png"),
+    };
+
+    // Ranking Perfect
+    public static final GreenfootImage RANKING_PERFECT = new GreenfootImage("ranking-perfect.png");
+
     // Stage
     public static final GreenfootImage STAGE_LEFT = new GreenfootImage("mania-stage-left.png");
     public static final GreenfootImage STAGE_RIGHT = new GreenfootImage("mania-stage-right.png");
