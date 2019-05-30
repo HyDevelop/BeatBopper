@@ -5,19 +5,15 @@
  * @author Andy Ge
  * @since 2019-05-29 08:34
  */
+@SuppressWarnings("WeakerAccess")
 public class ScoreDisplayerAccuracy extends NumberDisplayer
 {
-    private final ScoreCounter counter;
-
     /**
      * Construct an accuracy displayer.
-     *
-     * @param counter Score counter.
      */
-    public ScoreDisplayerAccuracy(ScoreCounter counter)
+    public ScoreDisplayerAccuracy()
     {
         super(Images.SCORE_NUMBERS, Images.SCORE_DOT);
-        this.counter = counter;
     }
 
     /**
@@ -25,8 +21,8 @@ public class ScoreDisplayerAccuracy extends NumberDisplayer
      */
     public void init()
     {
-        int y = 500;
-        super.init(Constants.WIDTH / 2, y);
+        super.init(Constants.WIDTH / 2 - Constants.GRAPHIC_SCORE_X_PADDING, 100);
+        update(1);
     }
 
     /**
@@ -34,22 +30,15 @@ public class ScoreDisplayerAccuracy extends NumberDisplayer
      *
      * @param accuracy Accuracy
      */
-    public void update()
+    public void update(double accuracy)
     {
-        // TODO: Clear the image.
+        // Clear the image.
         clear();
 
-        // Calculate the accuracy
-        double accuracy = ScoreCalculator.calculateAccuracy(counter);
-
-        // TODO: Draw "%" first because it draws from the right.
-        // (Hint: use drawLetter()) (Hint: % is in Images)
+        // Draw "%" first because it draws from the right.
         drawLetter(Images.SCORE_PERCENT);
 
-        // TODO: Draw the accuracy after it, keep 2 decimal
-        // (Hint: accuracy is a percentage from 0 to 1, so multiply it by 100)
-        // (Hint: there's already encapsulated methods in super class NumberDisplayer
-        //        that draws numbers.)
+        // Draw the accuracy after it, keep 2 decimal
         drawNumber(accuracy * 100, 2);
     }
 }
