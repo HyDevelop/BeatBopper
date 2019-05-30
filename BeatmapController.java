@@ -30,6 +30,9 @@ public class BeatmapController extends Actor
     /** Key hit score */
     private final KeyHitScore keyHitDisplayer;
 
+    /** Key hit animation displayers, in a row */
+    private final KeyHitAnimation[] keyHitAnimations;
+
     /**
      * Create a beatmap controller.
      */
@@ -43,6 +46,9 @@ public class BeatmapController extends Actor
         // Create key hit score object
         keyHitDisplayer = new KeyHitScore();
 
+        // Create key hit animation array
+        keyHitAnimations = new KeyHitAnimation[Constants.NUM_COLS];
+
         setImage((GreenfootImage) null);
     }
 
@@ -55,6 +61,12 @@ public class BeatmapController extends Actor
         // Put the key hit score displayer in the world
         getWorld().addObject(keyHitDisplayer, 0, 0);
         keyHitDisplayer.init();
+
+        for (int i = 0; i < keyHitAnimations.length; i++)
+        {
+            getWorld().addObject(keyHitAnimations[i] = new KeyHitAnimation(i), 0, 0);
+            keyHitAnimations[i].init();
+        }
     }
 
     /**
@@ -150,6 +162,7 @@ public class BeatmapController extends Actor
 
         // Show hit image
         keyHitDisplayer.hit(hitScore);
+        keyHitAnimations[note.getColumn()].resetIndex();
     }
 
     /**

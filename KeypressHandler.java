@@ -18,9 +18,6 @@ public class KeypressHandler extends Actor
 
     /** Key flashes, in a row */
     private final KeyFlash[] keyFlashes;
-    
-    /** Key hit animation displayers, in a row */
-    private final KeyHitAnimation[] keyHitAnimations;
 
     /**
      * Constructor for objects of class KeypressHandler
@@ -32,9 +29,6 @@ public class KeypressHandler extends Actor
 
         // Create key flashes array
         keyFlashes = new KeyFlash[Constants.NUM_COLS];
-
-        // Create key hit animation array
-        keyHitAnimations = new KeyHitAnimation[Constants.NUM_COLS];
 
         // This actor does not need to have image
         setImage((GreenfootImage) null);
@@ -52,8 +46,6 @@ public class KeypressHandler extends Actor
             keys[i].init();
             getWorld().addObject(keyFlashes[i] = new KeyFlash(i), 0, 0);
             keyFlashes[i].init();
-            getWorld().addObject(keyHitAnimations[i] = new KeyHitAnimation(i), 0, 0);
-            keyHitAnimations[i].init();
         }
     }
 
@@ -97,7 +89,6 @@ public class KeypressHandler extends Actor
     {
         ((BeatmapWorld) getWorld()).getBeatmapController().hit(key.getColumn());
         keyFlashes[key.getColumn()].press();
-        keyHitAnimations[key.getColumn()].resetIndex();
     }
 
     /**
