@@ -30,6 +30,14 @@ public class NumberDisplayer extends Actor
 
     /**
      * Construct a score displayer.
+     */
+    public NumberDisplayer()
+    {
+        this(Images.SCORE_NUMBERS, Images.SCORE_DOT);
+    }
+
+    /**
+     * Construct a score displayer.
      *
      * @param numberImages Numbers
      * @param dotImage Image of the dot.
