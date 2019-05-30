@@ -12,6 +12,9 @@ import greenfoot.World;
 @SuppressWarnings("WeakerAccess")
 public class ScoreCounter
 {
+    /** Beatmap */
+    private final Beatmap beatmap;
+
     /**
      * This array stores the count of all the hit scores:
      * scores[0]: Max
@@ -62,6 +65,7 @@ public class ScoreCounter
      */
     public ScoreCounter(Beatmap beatmap)
     {
+        this.beatmap = beatmap;
         this.scoresHitOrder = new int[beatmap.countTotalObjects()];
         this.halfNoteRatio = ScoreCalculator.calculateHalfNoteRatio(beatmap.countTotalObjects());
 
