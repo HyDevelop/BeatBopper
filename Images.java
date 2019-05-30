@@ -51,7 +51,7 @@ public class Images
     };
 
     // Key Numbers
-    public static final GreenfootImage[] KEY_HIT_SCORE_NUMBERS =
+    public static final GreenfootImage[] KEY_COMBO_NUMBERS =
     {
             new GreenfootImage("mn-0.png"),
             new GreenfootImage("mn-1.png"),
