@@ -14,7 +14,7 @@ import java.util.LinkedList;
  * @since 2019-05-29 17:06
  */
 @SuppressWarnings("WeakerAccess")
-public abstract class NumberDisplayer extends Actor
+public class NumberDisplayer extends Actor
 {
     /** Image of the Numbers (0-9) */
     private final GreenfootImage[] numberImages;
@@ -155,16 +155,6 @@ public abstract class NumberDisplayer extends Actor
     {
         getImage().clear();
         currentRenderedWidth = 0;
-    }
-
-    /**
-     * Obtain an NumberDisplayer object for testing
-     *
-     * @return NumberDisplayer object.
-     */
-    public static NumberDisplayer getTestInstance()
-    {
-        return new NumberDisplayer(Images.SCORE_NUMBERS, Images.SCORE_DOT) {};
     }
 
     // ###################
