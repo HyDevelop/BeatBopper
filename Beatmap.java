@@ -74,6 +74,29 @@ public class Beatmap
         return total;
     }
 
+    /**
+     * Check if this beatmap is done playing.
+     *
+     * @return Done playing or not
+     */
+    public boolean isDone()
+    {
+        // A done map should not have any present notes.
+        for (ArrayList<Note> notes : present)
+        {
+            if (!notes.isEmpty()) return false;
+        }
+
+        // A done map should not have any future notes.
+        for (ArrayList<NoteInformation> notes : future)
+        {
+            if (!notes.isEmpty()) return false;
+        }
+
+        // Done.
+        return true;
+    }
+
     // ###################
     // Getters and Setters
     // ###################
