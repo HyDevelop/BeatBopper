@@ -25,12 +25,12 @@ public class Beatmap
      *
      * Order: The earliest notes are at the front of the array.
      */
-    private ArrayList<NoteInformation>[] future;
-    private ArrayList<Note>[] present;
-    private ArrayList<NoteInformation>[] past;
+    private transient ArrayList<NoteInformation>[] future;
+    private transient ArrayList<Note>[] present;
+    private transient ArrayList<NoteInformation>[] past;
     
-    /** Music */
-    private Sound music;
+    /** Music (Not serialized) */
+    private transient Sound music;
 
     /** Properties */
     private Map<String, String> properties;
