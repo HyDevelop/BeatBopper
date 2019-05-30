@@ -35,6 +35,9 @@ public class BeatmapController extends Actor
 
     /**
      * Create a beatmap controller.
+     *
+     * @param beatmap The beatmap
+     * @param scoreCounter Score counter
      */
     public BeatmapController(Beatmap beatmap, ScoreCounter scoreCounter)
     {

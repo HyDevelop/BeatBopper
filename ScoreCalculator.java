@@ -25,6 +25,7 @@ public class ScoreCalculator
      * Calculation reference:
      * https://osu.ppy.sh/help/wiki/Accuracy
      *
+     * @param scoreCounter Score counter
      * @return accuracy in percentage.
      */
     public static double calculateAccuracy(ScoreCounter scoreCounter)
@@ -41,6 +42,7 @@ public class ScoreCalculator
      * Calculation reference:
      * https://osu.ppy.sh/help/wiki/Score
      *
+     * @param scoreCounter Score counter
      * @return Total score
      */
     public static int calculateTotal(ScoreCounter scoreCounter)

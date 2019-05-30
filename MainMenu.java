@@ -87,6 +87,8 @@ public class MainMenu extends World
 
     /**
      * Put the song selection buttons, MainMenuSongCover, in the world.
+     *
+     * @param beatmapSets Beatmap sets
      */
     private void putSongSelectionButtons(ArrayList<File> beatmapSets)
     {

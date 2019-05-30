@@ -64,6 +64,8 @@ public class ScoreCounter
 
     /**
      * Initialize score displayers.
+     *
+     * @param world World object
      */
     public void initDisplayers(World world)
     {

@@ -163,6 +163,10 @@ public class BeatmapWorld extends World
 
     /**
      * Draw a timing offset line.
+     *
+     * @param timingOffset Offset in milliseconds
+     * @param color Color of the line
+     * @param height Height of the line
      */
     public void drawOffsetLine(int timingOffset, Color color, int height)
     {

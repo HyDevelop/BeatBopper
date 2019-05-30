@@ -31,6 +31,8 @@ public class ScoreDisplayerAccuracy extends NumberDisplayer
 
     /**
      * Update image.
+     *
+     * @param accuracy Accuracy
      */
     public void update()
     {
