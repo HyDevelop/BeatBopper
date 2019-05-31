@@ -1,17 +1,17 @@
-import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
+import greenfoot.*;
 
 /**
- * Write a description of class TestWorld here.
- * 
- * @author (your name) 
- * @version (a version number or a date)
+ * Testing world
+ *
+ * @author Team APCSA 2019
+ * @author Yijie Gui
+ * @version 2019-05-24 20:37
  */
 public class TestWorld extends World
 {
 
     /**
      * Constructor for objects of class TestWorld.
-     * 
      */
     public TestWorld()
     {    

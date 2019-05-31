@@ -113,7 +113,7 @@ public class ScoreCounter
         accuracyDisplayer.update(ScoreCalculator.calculateAccuracy(this));
         bonusDisplayer.update(bonus);
         totalDisplayer.update((int) Math.round(totalScore + 0.5));
-        comboDisplayer.update((int) Math.round(totalScore + 0.5));
+        comboDisplayer.update(combo);
     }
 
     /**
@@ -130,10 +130,15 @@ public class ScoreCounter
 
         // Update bonus and total score.
         bonus = ScoreCalculator.calculateNewBonus(bonus, hit);
-        totalScore += ScoreCalculator.calculateHitScore(halfNoteRatio, bonus, hit);
+        totalScore += ScoreCalculator.calculateHitScore(combo, halfNoteRatio, bonus, hit);
 
-        // > 4 does not count as hit.
-        if (hit > 4) resetCombo();
+        // Update combo (> 4 does not count as hit.)
+        if (hit > 4)
+        {
+            resetCombo();
+            comboDisplayer.miss();
+        }
+        else combo ++;
 
         // Update image
         updateImage();
@@ -197,6 +202,11 @@ public class ScoreCounter
         return totalDisplayer;
     }
 
+    public ScoreDisplayerCombo getComboDisplayer()
+    {
+        return comboDisplayer;
+    }
+
     public int getCombo()
     {
         return combo;
@@ -205,5 +215,10 @@ public class ScoreCounter
     public int getMaxCombo()
     {
         return maxCombo;
+    }
+
+    public Beatmap getBeatmap()
+    {
+        return beatmap;
     }
 }

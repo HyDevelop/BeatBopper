@@ -33,9 +33,6 @@ public class BeatmapController extends Actor
     /** Key hit animation displayers, in a row */
     private final KeyHitAnimation[] keyHitAnimations;
 
-    /** Done or not */
-    private boolean done;
-
     /**
      * Create a beatmap controller.
      *
@@ -80,8 +77,33 @@ public class BeatmapController extends Actor
      */
     public void start()
     {
-        timer.start(-Constants.GAME_MUSIC_OFFSET);
-        beatmap.getMusic().play();
+        // Use async execution to deal with offsets.
+        new Thread(() ->
+        {
+            try
+            {
+                int baseDelay = Constants.GAME_START_OFFSET + Constants.GAME_SPEED_MS;
+                int musicDelay = baseDelay + Constants.GAME_MUSIC_OFFSET;
+
+                // Get who's bigger. This is necessary because a thread can't
+                // sleep negative seconds.
+                if (baseDelay > musicDelay)
+                {
+                    timer.start(baseDelay);
+                    Thread.sleep(musicDelay);
+                    beatmap.getMusic().play();
+                }
+                else
+                {
+                    Thread.sleep(baseDelay);
+                    timer.start();
+                    Thread.sleep(musicDelay - baseDelay);
+                    beatmap.getMusic().play();
+                }
+            }
+            catch (InterruptedException ignored) {}
+
+        }).start();
     }
 
     /**
@@ -89,7 +111,7 @@ public class BeatmapController extends Actor
      */
     public void act()
     {
-        if (done) return;
+        if (!timer.isRunning()) return;
 
         // Get time
         int gameTime = timer.getTotalDuration();
@@ -103,14 +125,12 @@ public class BeatmapController extends Actor
                 NoteInformation noteInfo = col.get(i);
 
                 // Within the speed range.
-                if (noteInfo.getTime() + Constants.GAME_SPAWNING_OFFSET - gameTime > Constants.GAME_SPEED_MS)
+                if (noteInfo.getTime() + Constants.GAME_SPAWNING_OFFSET - gameTime < Constants.GAME_SPEED_MS)
                 {
-                    break;
+                    // Spawn the note to the top.
+                    spawnNote(noteInfo);
+                    i--;
                 }
-
-                // Spawn the note to the top.
-                spawnNote(noteInfo);
-                i--;
             }
         }
 
@@ -135,7 +155,8 @@ public class BeatmapController extends Actor
         // Check if done.
         if (beatmap.isDone())
         {
-            done = true;
+            // Stop timer
+            timer.stop();
 
             /* Output JSON object for debug.
             try
@@ -152,6 +173,9 @@ public class BeatmapController extends Actor
             getWorld().removeObject(scoreCounter.getAccuracyDisplayer());
             getWorld().removeObject(scoreCounter.getBonusDisplayer());
             getWorld().removeObject(scoreCounter.getTotalDisplayer());
+            
+            // Make combo display max combo
+            scoreCounter.getComboDisplayer().update(scoreCounter.getMaxCombo());
 
             // Create score report.
             ScoreReport report = new ScoreReport(scoreCounter);
@@ -197,7 +221,12 @@ public class BeatmapController extends Actor
 
         // Show hit image
         keyHitDisplayer.hit(hitScore);
-        keyHitAnimations[note.getColumn()].resetIndex();
+
+        // Show hit animation if not missed.
+        if (hitScore < 5)
+        {
+            keyHitAnimations[note.getColumn()].resetIndex();
+        }
     }
 
     /**
@@ -254,10 +283,5 @@ public class BeatmapController extends Actor
     public ScoreCounter getScoreCounter()
     {
         return scoreCounter;
-    }
-
-    public boolean isDone()
-    {
-        return done;
     }
 }

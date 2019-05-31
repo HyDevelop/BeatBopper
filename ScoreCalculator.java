@@ -22,8 +22,6 @@ public class ScoreCalculator
 
     /**
      * Calculate accuracy with formula.
-     * Calculation reference:
-     * https://osu.ppy.sh/help/wiki/Accuracy
      *
      * @param scoreCounter Score counter
      * @return accuracy in percentage.
@@ -39,8 +37,6 @@ public class ScoreCalculator
     /**
      * Calculate total score with formula.
      * This method is used only when the game is finished.
-     * Calculation reference:
-     * https://osu.ppy.sh/help/wiki/Score
      *
      * @param scoreCounter Score counter
      * @return Total score
@@ -56,12 +52,19 @@ public class ScoreCalculator
 
         // Bonus value
         double bonus = 100d;
+        
+        // Combo
+        int combo = 0;
 
         // Calculate score for each note.
         for (int hit : scoreCounter.getScoresHitOrder())
         {
             bonus = calculateNewBonus(bonus, hit);
-            totalScore += calculateHitScore(half, bonus, hit);
+            
+            if (hit > 4) combo = 0;
+            else combo++;
+            
+            totalScore += calculateHitScore(combo, half, bonus, hit);
         }
 
         return (int) Math.round(totalScore);
@@ -82,16 +85,27 @@ public class ScoreCalculator
     /**
      * Calculate the score for a specific note hit.
      *
+     * @param combo Combo.
      * @param hnr Half note ratio.
      * @param bonus Bonus
      * @param hit Hit value.
      * @return Hit score.
      */
-    public static double calculateHitScore(double hnr, double bonus, int hit)
+    public static double calculateHitScore(int combo, double hnr, double bonus, int hit)
     {
+        /* 1,000,000 Based algorithm:
+        // With this algorithm, the maximum score is 1,000,000
+        // This is the most common algorithm for this kind of games on the internet.
+        // But I mean who needs this when there's already Accuracy defined...
+
         double baseScore = hnr * HIT_VALUES[hit];
         double bonusScore = hnr * HIT_BONUS_VALUES[hit] * Math.sqrt(bonus);
-        return baseScore + bonusScore;
+        return baseScore + bonusScore; */
+
+        // Unlimited score algorithm:
+        if (combo > 100) combo = 100;
+        double value = HIT_VALUES[hit];
+        return value + (value * (combo + bonus) / 25);
     }
 
     /**

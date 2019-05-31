@@ -19,13 +19,16 @@ public class Constants
     public static final int HEIGHT = 800;
 
     /** How many millis is from spawning to hitting the notes? */
-    public static final int GAME_SPEED_MS = 500;
+    public static final int GAME_SPEED_MS = 900;
 
     /** How many millis is from the supposed spawning to the actual spawning? */
     public static final int GAME_SPAWNING_OFFSET = -45;
 
     /** How many millis is from the supposed start of music to the actual start? */
     public static final int GAME_MUSIC_OFFSET = -273;
+
+    /** How many millis is from the supposed start of music to the actual start? */
+    public static final int GAME_START_OFFSET = 500;
 
     /** How much times easier is the judgement of the game? (less than 1 = harder) */
     public static final double GAME_EASY_MULTIPLIER = 2;

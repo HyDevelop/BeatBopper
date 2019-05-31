@@ -1,5 +1,6 @@
 import greenfoot.Actor;
 import greenfoot.GreenfootImage;
+import greenfoot.GreenfootSound;
 
 import java.util.LinkedList;
 
@@ -11,13 +12,21 @@ import java.util.LinkedList;
  * @author Yijie Gui
  * @since 2019-05-29 08:38
  */
+@SuppressWarnings("WeakerAccess")
 public class ScoreDisplayerCombo extends Actor
 {
+    /** Sound effect for combo break */
+    private static final GreenfootSound COMBO_BREAK = new GreenfootSound("combobreak.aiff");
+
+    /** Last combo */
+    private int lastCombo = 0;
+
     /**
      * Construct a combo displayer object
      */
     public ScoreDisplayerCombo()
     {
+        setImage((GreenfootImage) null);
     }
 
     /**
@@ -41,6 +50,15 @@ public class ScoreDisplayerCombo extends Actor
      */
     public void update(int combo)
     {
+        lastCombo = combo;
+
+        // Display combo only start at 3
+        if (combo < 3)
+        {
+            setImage((GreenfootImage) null);
+            return;
+        }
+
         // Get digits
         LinkedList<Integer> stack = NumberDisplayer.toDigits(combo);
 
@@ -65,5 +83,15 @@ public class ScoreDisplayerCombo extends Actor
             image.drawImage(digitImg, pointer, maxHeight - digitImg.getHeight());
             pointer += digitImg.getWidth();
         }
+    }
+
+    /**
+     * This method is called when player misses a note.
+     * Precondition: This should be called before update()
+     */
+    public void miss()
+    {
+        // Play a sound if there's a combo before missing
+        if (lastCombo >= 3) COMBO_BREAK.play();
     }
 }

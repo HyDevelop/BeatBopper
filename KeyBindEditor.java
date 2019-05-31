@@ -72,7 +72,7 @@ public class KeyBindEditor extends Actor
         image.fill();
 
         // Fill text
-        GreenfootImage textImage = new GreenfootImage(getText(), 24, null, null);
+        GreenfootImage textImage = new GreenfootImage(getText(), 16, null, null);
         image.drawImage(textImage, (image.getWidth() - textImage.getWidth()) / 2, 15 - textImage.getHeight() / 2);
         setImage(image);
     }
