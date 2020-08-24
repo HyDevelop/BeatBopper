@@ -25,7 +25,7 @@ public class Constants
     public static final int GAME_SPAWNING_OFFSET = -45;
 
     /** How many millis is from the supposed start of music to the actual start? */
-    public static final int GAME_MUSIC_OFFSET = -273;
+    public static final int GAME_MUSIC_OFFSET = -50;
 
     /** How many millis is from the supposed start of music to the actual start? */
     public static final int GAME_START_OFFSET = 500;
