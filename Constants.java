@@ -19,7 +19,7 @@ public class Constants
     public static final int HEIGHT = 800;
 
     /** How many millis is from spawning to hitting the notes? */
-    public static final int GAME_SPEED_MS = 900;
+    public static final int GAME_SPEED_MS = 500;
 
     /** How many millis is from the supposed spawning to the actual spawning? */
     public static final int GAME_SPAWNING_OFFSET = -45;
@@ -53,9 +53,6 @@ public class Constants
 
     /** Key flash disappear speed */
     public static final int GRAPHIC_KEY_FLASH_SPEED = 20;
-
-    /** Key hit score disappear speed */
-    public static final int GRAPHIC_KEY_HIT_SCORE_SPEED = 8;
 
     /** Score displayer x padding (How far are they from the boarder?) */
     public static final int GRAPHIC_SCORE_X_PADDING = 30;

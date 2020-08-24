@@ -16,6 +16,9 @@ public class KeyHitAnimation extends Actor
 
     /** Current index of the animated image */
     private int index;
+    
+    /** Timer */
+    private long time = System.currentTimeMillis();
 
     /**
      * Construct a key hit animation object
@@ -50,6 +53,12 @@ public class KeyHitAnimation extends Actor
      */
     public void act()
     {
+        // Execute every 20 ms
+        long current = System.currentTimeMillis();
+        if (current - time < 20) return;
+        time = current;
+        
+        
         if (index < Images.KEY_HIT_ANIMATION_FRAMES.length)
         {
             setImage(Images.KEY_HIT_ANIMATION_FRAMES[index]);

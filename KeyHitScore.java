@@ -13,6 +13,9 @@ public class KeyHitScore extends Actor
 {
     /** Transparency (0 = fully transparent, 255 = not transparent) */
     private int transparency = 255;
+    
+    /** Timer */
+    private long time = System.currentTimeMillis();
 
     /**
      * Create object and initialize to no image
@@ -41,8 +44,13 @@ public class KeyHitScore extends Actor
     @Override
     public void act()
     {
+        // Execute every 10 ms
+        long current = System.currentTimeMillis();
+        if (current - time < 10) return;
+        time = current;
+        
         // Reduce the transparency by Constants.GRAPHIC_KEY_HIT_SCORE_SPEED ( > 0)
-        transparency -= Constants.GRAPHIC_KEY_HIT_SCORE_SPEED;
+        transparency -= 4;
         if (transparency < 0) transparency = 0;
 
         // Set the transparency of the image to the value in the transparency variable.
